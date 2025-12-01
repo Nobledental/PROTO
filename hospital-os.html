@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HealthFlo Hospital OS — HMS Control</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script defer src="js/hospital-os.js"></script>
+</head>
+<body>
+  <header class="hf-header">
+    <div class="hf-header-inner">
+      <div class="hf-logo"><span class="logo-dot"></span>HealthFlo Hospital OS</div>
+      <nav class="hf-nav" id="primaryNav">
+        <a href="#registration">Registration</a>
+        <a href="#ipd">IPD</a>
+        <a href="#labs">Labs</a>
+        <a href="#pharmacy">Pharmacy</a>
+        <a href="#billing">Billing</a>
+        <a href="#admin">Admin</a>
+      </nav>
+      <div class="hf-nav-actions">
+        <button id="navToggle" class="hf-icon-btn">☰</button>
+        <button id="themeToggle" class="hf-icon-btn">🌗</button>
+      </div>
+    </div>
+    <div class="hf-ticker" id="hfTicker">
+      <div class="ticker-track">
+        <span>OPD queue: 18 waiting • Fast-track: 4 triaged</span>
+        <span>IPD rounds: 32 beds covered • 3 pending orders to sign</span>
+        <span>Labs: 12 CBCs running • Radiology: 3 MRI ready for report</span>
+        <span>Insurance desk: 9 cashless pre-auth in review • zero denials</span>
+        <span>Pharmacy: Oncology stock reconciled • 100% cold-chain OK</span>
+      </div>
+    </div>
+  </header>
+
+  <section class="hf-hero" id="top">
+    <div class="hero-content">
+      <p class="badge">IRDAI-aligned • NABH-ready • Bedside-fast</p>
+      <h1>Hospital OS that keeps OPD queues flowing and IPD beds compliant.</h1>
+      <p class="muted">Digitize registrations, triage, rounds, pharmacy, labs, billing, and insurance with AI guardrails. Every order is audit-ready; every claim is denial-proof.</p>
+      <div class="hero-cta">
+        <a class="btn-primary" href="#registration">Start registration</a>
+        <a class="btn-ghost" id="openCopilot">Ask the Copilot</a>
+      </div>
+      <div class="hero-metrics">
+        <div class="metric"><strong>2m</strong><span>OPD visits / month</span></div>
+        <div class="metric"><strong>14k</strong><span>Active beds</span></div>
+        <div class="metric"><strong>99.2%</strong><span>Clean claims</span></div>
+        <div class="metric"><strong>11m</strong><span>Avg. discharge TAT</span></div>
+      </div>
+    </div>
+    <div class="hero-pane">
+      <div class="frosted-card">
+        <h3>Live hospital pulse</h3>
+        <div class="vitals-stack" id="liveVitals">
+          <div class="vital-row"><span>OPD</span><strong>18 waiting</strong><small>2 doctors auto-assigned</small></div>
+          <div class="vital-row"><span>IPD</span><strong>32 rounds</strong><small>Orders pending: 3</small></div>
+          <div class="vital-row"><span>Labs</span><strong>22 tests</strong><small>HL7 sync on</small></div>
+          <div class="vital-row"><span>Billing</span><strong>₹14.2L</strong><small>Unbilled: 3 cases</small></div>
+        </div>
+        <div class="ai-note" id="aiPulse">AI guardrails active: pre-auth aging under 30 mins.</div>
+        <button class="btn-mini" id="expandPulse">Expand hospital pulse</button>
+      </div>
+      <div class="frosted-card">
+        <h3>Command shortcuts</h3>
+        <div class="quick-actions">
+          <button data-cta="Fast-track triage">Fast-track triage</button>
+          <button data-cta="Prep IPD discharge">Prep IPD discharge</button>
+          <button data-cta="Send MRI to consultant">Send MRI to consultant</button>
+          <button data-cta="Trigger cashless pre-auth">Trigger cashless pre-auth</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="registration" class="hf-section">
+    <div class="section-head">
+      <div>
+        <p class="badge">Registration & OPD</p>
+        <h2>Frictionless patient intake and OPD flow.</h2>
+        <p class="muted">Queue, triage, appointments, clinical notes — synced to billing and insurance eligibility.</p>
+      </div>
+      <div class="tab-row" id="opdTabs">
+        <button class="hf-chip active" data-tab="queue">Queue</button>
+        <button class="hf-chip" data-tab="appointments">Appointments</button>
+        <button class="hf-chip" data-tab="notes">Clinical notes</button>
+      </div>
+    </div>
+    <div class="tile-grid" id="opdContent">
+      <!-- Injected by JS -->
+    </div>
+  </section>
+
+  <section id="ipd" class="hf-section">
+    <div class="section-head">
+      <div>
+        <p class="badge">IPD — Admissions, Rounds, Orders</p>
+        <h2>Bedside clarity with vitals, orders, nursing, and surgery prep.</h2>
+        <p class="muted">Admit with packages, capture vitals streams, lock orders, and keep discharge paperwork audit-ready.</p>
+      </div>
+      <div class="hf-chip-row">
+        <button class="hf-chip" data-cta="Open bedside view">Open bedside</button>
+        <button class="hf-chip" data-cta="Start surgery checklist">Surgery checklist</button>
+        <button class="hf-chip" data-cta="Sync nursing meds">Sync nursing meds</button>
+      </div>
+    </div>
+    <div class="tile-grid two">
+      <div class="frosted-card">
+        <h3>Admissions</h3>
+        <ul class="bullet-list" id="admissionList">
+          <li><strong>Cardiac HDU</strong> — 4 beds free • Package: CABG bundled • Pre-auth: active</li>
+          <li><strong>Neuro ICU</strong> — 1 bed free • Ventilator ready • DVT prophylaxis checklist locked</li>
+          <li><strong>Ward A</strong> — 6 beds free • Insurance desk cleared 3 cases</li>
+        </ul>
+        <div class="mini-grid" id="admissionMetrics">
+          <div class="mini-card"><span>LOS</span><strong>3.1d</strong><small>Avg length of stay</small></div>
+          <div class="mini-card"><span>Orders</span><strong>42</strong><small>Pending sign-off</small></div>
+          <div class="mini-card"><span>Discharges</span><strong>8</strong><small>Planned today</small></div>
+        </div>
+      </div>
+      <div class="frosted-card">
+        <h3>Rounds — live vitals</h3>
+        <div class="vitals-stack" id="ipdVitals">
+          <div class="vital-row"><span>SpO₂</span><strong>98%</strong><small>Stable</small></div>
+          <div class="vital-row"><span>BP</span><strong>122/78</strong><small>Within goal</small></div>
+          <div class="vital-row"><span>HR</span><strong>82 bpm</strong><small>Resting</small></div>
+          <div class="vital-row"><span>Temp</span><strong>36.8°C</strong><small>Afebrile</small></div>
+        </div>
+        <div class="ai-note" id="ipdInsight">AI: No sepsis flags; pending: 1 IV antibiotic adjustment.</div>
+        <div class="rounds-actions">
+          <button data-cta="Escalate to intensivist">Escalate</button>
+          <button data-cta="Order labs now">Order labs</button>
+          <button data-cta="Update nursing notes">Update notes</button>
+        </div>
+      </div>
+    </div>
+    <div class="tile-grid two">
+      <div class="frosted-card">
+        <h3>Doctor orders</h3>
+        <div class="order-list" id="orderList">
+          <div class="order-item">
+            <div>
+              <strong>IV Piperacillin-Tazobactam</strong>
+              <small>8-hourly • Start 10:00 • Stop 72 hours</small>
+            </div>
+            <button data-cta="Pause antibiotic">Pause</button>
+          </div>
+          <div class="order-item">
+            <div>
+              <strong>Physio — Early mobilization</strong>
+              <small>Twice daily • Fall-risk cleared</small>
+            </div>
+            <button data-cta="Notify physio">Notify</button>
+          </div>
+          <div class="order-item">
+            <div>
+              <strong>Fluid chart</strong>
+              <small>Maintenance 80ml/hr • Urine output trending</small>
+            </div>
+            <button data-cta="Adjust fluids">Adjust</button>
+          </div>
+        </div>
+      </div>
+      <div class="frosted-card">
+        <h3>Nursing & surgery workflow</h3>
+        <ul class="bullet-list" id="nursingList">
+          <li>Medication chart auto-mapped to MAR; barcode scan enforced.</li>
+          <li>Surgery panel: consent captured, blood products reserved, instrument count checklist.</li>
+          <li>Pain scores tracked every 4 hours; triggers escalate to duty doctor.</li>
+          <li>Diet orders synced to kitchen with allergy blocks.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="labs" class="hf-section">
+    <div class="section-head">
+      <div>
+        <p class="badge">Labs & Radiology</p>
+        <h2>Zero-leak test ordering and analyzer-ready results.</h2>
+        <p class="muted">HL7-ready orders, sample tracking, analyzer simulation, and PACS-style previews with audit trails.</p>
+      </div>
+      <div class="hf-chip-row">
+        <button class="hf-chip active" data-tab-target="orders">Orders</button>
+        <button class="hf-chip" data-tab-target="results">Results</button>
+        <button class="hf-chip" data-tab-target="integration">Integration</button>
+      </div>
+    </div>
+    <div class="tile-grid two" id="labTabs">
+      <div class="frosted-card" data-tab="orders">
+        <h3>New orders</h3>
+        <div class="order-item">
+          <div><strong>CBC + CRP</strong><small>STAT • Auto-push to analyzer • Barcodes printed</small></div>
+          <button data-cta="Print sample labels">Print labels</button>
+        </div>
+        <div class="order-item">
+          <div><strong>Electrolytes</strong><small>Routine • Add-on allowed</small></div>
+          <button data-cta="Add potassium reflex">Add reflex</button>
+        </div>
+        <div class="order-item">
+          <div><strong>Chest X-Ray</strong><small>Portable • Ward A • Radiologist mapped</small></div>
+          <button data-cta="Notify radiographer">Notify</button>
+        </div>
+      </div>
+      <div class="frosted-card hidden" data-tab="results">
+        <h3>Results ready</h3>
+        <ul class="bullet-list">
+          <li><strong>CBC</strong> — Hb 12.8, WBC 8.2k, Platelets 230k • Verified</li>
+          <li><strong>CRP</strong> — 7 mg/L • Trending downward</li>
+          <li><strong>MRI Brain</strong> — No acute bleed; report shared to consultant</li>
+        </ul>
+        <button class="btn-mini" data-cta="Share results to EMR">Share to EMR</button>
+      </div>
+      <div class="frosted-card hidden" data-tab="integration">
+        <h3>Analyzer & PACS</h3>
+        <p class="muted">Simulated HL7 feed streaming from hematology and chemistry analyzers; PACS viewer ready for MR/CT.</p>
+        <ul class="bullet-list">
+          <li>Bi-directional status: ACK received for 22/22 samples.</li>
+          <li>PACS sync: 3 MRI, 2 CT waiting for report sign-off.</li>
+          <li>Auto QC reminders dispatched to lab manager.</li>
+        </ul>
+        <button class="btn-mini" data-cta="Open analyzer console">Open console</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="pharmacy" class="hf-section">
+    <div class="section-head">
+      <div>
+        <p class="badge">Pharmacy</p>
+        <h2>Stock-true dispensing with billing sync.</h2>
+        <p class="muted">Inventory counts, substitution rules, cold-chain alerts, and billing-ready issue notes in one screen.</p>
+      </div>
+      <div class="hf-chip-row" id="pharmacyFilters">
+        <button class="hf-chip active" data-filter="all">All</button>
+        <button class="hf-chip" data-filter="oncology">Oncology</button>
+        <button class="hf-chip" data-filter="critical">Critical care</button>
+        <button class="hf-chip" data-filter="surgical">Surgical</button>
+      </div>
+    </div>
+    <div class="tile-grid" id="pharmacyGrid">
+      <!-- Injected by JS -->
+    </div>
+  </section>
+
+  <section id="billing" class="hf-section">
+    <div class="section-head">
+      <div>
+        <p class="badge">Billing & Insurance Desk</p>
+        <h2>Denial-proof cashless and discharge-ready billing.</h2>
+        <p class="muted">Pre-auth drafts, enhancements, estimate control, and final bill audits — with IRDAI-ready documentation.</p>
+      </div>
+      <div class="hf-chip-row">
+        <button class="hf-chip" data-cta="Launch pre-auth">Pre-auth</button>
+        <button class="hf-chip" data-cta="Send enhancement">Enhancement</button>
+        <button class="hf-chip" data-cta="Run audit checklist">Audit checklist</button>
+      </div>
+    </div>
+    <div class="tile-grid two">
+      <div class="frosted-card">
+        <h3>Insurance pipeline</h3>
+        <div class="pipeline" id="insurancePipeline">
+          <div class="pipe-step">
+            <span>Estimate</span>
+            <strong>12</strong>
+            <small>₹7.8L total</small>
+          </div>
+          <div class="pipe-step">
+            <span>Pre-auth</span>
+            <strong>9</strong>
+            <small>Avg 26 mins</small>
+          </div>
+          <div class="pipe-step">
+            <span>Enhancement</span>
+            <strong>3</strong>
+            <small>Docs ready</small>
+          </div>
+          <div class="pipe-step">
+            <span>Final bill</span>
+            <strong>6</strong>
+            <small>Zero denials</small>
+          </div>
+        </div>
+        <p class="ai-note" id="billingInsight">AI: Claim coding clean; no sub-limit breaches.</p>
+      </div>
+      <div class="frosted-card">
+        <h3>Billing simulator</h3>
+        <div class="simulator">
+          <label>Package</label>
+          <input type="text" id="packageInput" value="Lap chole package" />
+          <label>Consumables (₹)</label>
+          <input type="number" id="consumableInput" value="18000" />
+          <label>Pharmacy (₹)</label>
+          <input type="number" id="pharmacyInput" value="12500" />
+          <label>Stay days</label>
+          <input type="number" id="stayInput" value="3" />
+          <button class="btn-primary" id="runSimulation">Run simulation</button>
+          <div class="sim-result" id="simResult">Estimated payable: ₹0</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="admin" class="hf-section">
+    <div class="section-head">
+      <div>
+        <p class="badge">Hospital Admin</p>
+        <h2>One console for doctors, staff, beds, departments, and tariffs.</h2>
+        <p class="muted">Keep rosters synced, bed board accurate, and tariff packages consistent across billing and insurance desks.</p>
+      </div>
+      <div class="hf-chip-row">
+        <button class="hf-chip" data-cta="Add doctor profile">Add doctor</button>
+        <button class="hf-chip" data-cta="Map tariff">Map tariff</button>
+        <button class="hf-chip" data-cta="Publish roster">Publish roster</button>
+      </div>
+    </div>
+    <div class="tile-grid two">
+      <div class="frosted-card">
+        <h3>Master data</h3>
+        <ul class="bullet-list" id="masterData">
+          <li>Doctors: 240 active • OPD templates linked</li>
+          <li>Wards/Beds: 18 wards • 620 beds • live occupancy board</li>
+          <li>Departments: 24 mapped • Radiology + Lab integrated</li>
+          <li>Tariffs: 1800 items • IRDAI compliant packages pre-set</li>
+        </ul>
+      </div>
+      <div class="frosted-card">
+        <h3>Alerts & governance</h3>
+        <ul class="bullet-list" id="alertsList">
+          <li>Fire drill due tomorrow — notify facility team.</li>
+          <li>Antibiotic stewardship: 3 overrides pending ID approval.</li>
+          <li>Insurance: 2 policies need updated TPA MOUs.</li>
+          <li>Audit: 5 discharge summaries awaiting sign-off.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="hf-dock">
+    <a class="dock-item active" href="#top">Home</a>
+    <a class="dock-item" href="#registration">OPD</a>
+    <a class="dock-item" href="#ipd">IPD</a>
+    <a class="dock-item" href="#labs">Labs</a>
+    <a class="dock-item" href="#pharmacy">Pharmacy</a>
+    <a class="dock-item" href="#billing">Billing</a>
+    <a class="dock-item" href="#admin">Admin</a>
+  </div>
+
+  <div class="copilot-fab" id="copilotFab">🤖</div>
+  <div class="copilot-panel hidden" id="copilotPanel">
+    <div class="copilot-head">
+      <h4>HealthFlo Copilot — Hospital</h4>
+      <button id="closeCopilot">✕</button>
+    </div>
+    <div class="copilot-body" id="copilotChat">
+      <div class="ai-bubble">I watch your queues, beds, and claims. Ask me to triage, prep discharges, or draft pre-auth.</div>
+    </div>
+    <div class="copilot-input">
+      <input type="text" id="copilotInput" placeholder="Ask: Pre-auth aging, bed board, or drug stock" />
+      <button id="copilotSend">Send</button>
+    </div>
+  </div>
+
+</body>
+</html>
