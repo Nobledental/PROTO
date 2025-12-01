@@ -11,6 +11,13 @@
   <header class="hf-header">
     <div class="hf-header-inner">
       <div class="hf-logo"><span class="logo-dot"></span>HealthFlo Ecosystem</div>
+      <nav class="hf-nav" id="primaryNav">
+        <a href="#patient">Patient</a>
+        <a href="#hospital">Hospital</a>
+        <a href="#insurance">Insurance</a>
+        <a href="#rcm">RCM</a>
+        <a href="#admin">Admin</a>
+      </nav>
       <div class="hf-nav-actions">
         <div class="hf-personas" id="personaSelect">
           <button class="hf-chip active" data-persona="patient">Patient</button>
@@ -38,6 +45,11 @@
       <p class="badge">AI-powered • IRDAI-compliant • NABH-ready</p>
       <h1>HealthFlo — One operating system for patients, hospitals, insurers, and RCM teams.</h1>
       <p class="muted">Seamless appointments, cashless insurance clarity, EMI-backed procedures, ambulance orchestration, AI vitals guidance, and a medical record vault trusted by India’s leading providers.</p>
+      <div class="frosted-card hero-search">
+        <input type="search" id="hfSearch" placeholder="Search doctors, hospitals, policies, or claims" />
+        <button class="btn-mini" id="searchCTA">Search</button>
+        <small class="muted">Examples: “Cashless cardiology at Fortis”, “TPA status for Apollo claim”, “Book home physio in Koramangala”.</small>
+      </div>
       <div class="hero-cta">
         <a class="btn-primary" href="#patient">Open Patient OS</a>
         <a class="btn-ghost" href="#hospital">Explore Hospital OS</a>
@@ -212,6 +224,42 @@
     </div>
   </section>
 
+  <section class="hf-section" id="rcm">
+    <div class="section-head">
+      <div>
+        <p class="badge">RCM OS</p>
+        <h2>Recovery, denials, and TPA loops closed.</h2>
+        <p class="muted">Collections-friendly workflows with coding accuracy, reminder cadences, and payer nudges baked in.</p>
+      </div>
+      <div class="section-actions">
+        <button class="btn-ghost" data-cta="rcm-forecast">Run forecast</button>
+        <button class="btn-primary" data-cta="rcm-recovery">Start recovery</button>
+      </div>
+    </div>
+    <div class="hf-grid">
+      <div class="hf-card tile">
+        <h3>Denial Prevention</h3>
+        <p>Auto-detect coding gaps, prior-auth lapses, and room-rent violations before billing hits payers.</p>
+        <div class="mini-row"><span>Risk</span><strong>0 high-risk claims today</strong></div>
+      </div>
+      <div class="hf-card tile">
+        <h3>TPA Messenger</h3>
+        <p>Escalation-ready messaging with stamped timelines, reminders, and attachable audit bundles.</p>
+        <div class="mini-row"><span>Pending</span><strong>6 TPA responses awaited</strong></div>
+      </div>
+      <div class="hf-card tile">
+        <h3>Collections Cockpit</h3>
+        <p>AR aging heatmap, follow-up cadences, and patient SMS nudges with digital payment links.</p>
+        <div class="mini-row"><span>AR</span><strong>₹38L in 30-60 days</strong></div>
+      </div>
+      <div class="hf-card tile">
+        <h3>Audit Binder</h3>
+        <p>Compile discharge summaries, operative notes, and radiology proofs into insurer-ready packets.</p>
+        <div class="mini-row"><span>Ready</span><strong>14 cases exported</strong></div>
+      </div>
+    </div>
+  </section>
+
   <section class="hf-section" id="admin">
     <div class="section-head">
       <div>
@@ -251,6 +299,7 @@
     <a href="#patient" class="dock-item active">Patient</a>
     <a href="#hospital" class="dock-item">Hospital</a>
     <a href="#insurance" class="dock-item">Insurance</a>
+    <a href="#rcm" class="dock-item">RCM</a>
     <a href="#admin" class="dock-item">Admin</a>
     <button class="dock-item" id="openCopilot">Copilot</button>
   </nav>
