@@ -1,1 +1,348 @@
+/* ============================================================
+   HealthFlo — VOKA Ceramic White Medical OS
+   Global Stylesheet for All Pages
+   ============================================================ */
+
+/* Reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body,
+h1,
+h2,
+h3,
+p,
+ul,
+li,
+a {
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ============================================================
+   THEME TOKENS — VOKA CERAMIC WHITE
+   ============================================================ */
+
+:root {
+  --bg: #f5f9ff;
+  --surface: rgba(255, 255, 255, 0.9);
+  --surface-strong: rgba(255, 255, 255, 1);
+  --border: rgba(0, 40, 90, 0.10);
+
+  --text: #0b2340;
+  --muted: #6a7c98;
+
+  /* Neon accents */
+  --mint: #2affd4;
+  --aqua: #3fc7ff;
+  --violet: #b56cff;
+
+  /* Gradients */
+  --grad-mint-aqua: linear-gradient(135deg, #2affd4, #3fc7ff);
+  --grad-aqua-violet: linear-gradient(135deg, #3fc7ff, #b56cff);
+
+  /* Shadows */
+  --shadow-soft: 0 6px 20px rgba(20, 40, 80, 0.12);
+  --shadow-ceramic: 0 12px 32px rgba(15, 35, 60, 0.16);
+  --shadow-glow: 0 0 20px rgba(70, 255, 220, 0.35);
+
+  --radius: 26px;
+
+  --t: 260ms cubic-bezier(.22, .61, .36, 1);
+}
+
+/* DARK MODE */
+html[data-theme="dark"] {
+  --bg: #0a1222;
+  --surface: rgba(20, 25, 38, 0.8);
+  --surface-strong: rgba(20, 25, 38, 1);
+  --border: rgba(255, 255, 255, 0.08);
+  --text: #f2f5ff;
+  --muted: #9fb0c9;
+
+  --shadow-soft: 0 6px 20px rgba(0, 0, 0, 0.60);
+  --shadow-ceramic: 0 12px 32px rgba(0, 0, 0, 0.75);
+}
+
+/* ============================================================
+   BASE LAYOUT
+   ============================================================ */
+
+body {
+  font-family: "Manrope", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.55;
+  padding-bottom: 60px;
+}
+
+.hf-scroll {
+  width: min(1080px, 94vw);
+  margin: 0 auto;
+  padding: 18px 0 40px;
+}
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+
+.hf-header {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  backdrop-filter: blur(14px);
+  background: rgba(255, 255, 255, 0.55);
+  border-bottom: 1px solid var(--border);
+}
+
+html[data-theme="dark"] .hf-header {
+  background: rgba(20, 25, 38, 0.55);
+}
+
+.hf-header-inner {
+  width: min(1080px, 94vw);
+  margin: 0 auto;
+  padding: 14px 0;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Avatar + Neon Ring */
+.hf-avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--surface-strong);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 1.25rem;
+  color: var(--text);
+  position: relative;
+  box-shadow: var(--shadow-soft);
+}
+
+.neon-ring::before {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  background: var(--grad-mint-aqua);
+  z-index: -1;
+  filter: blur(8px);
+}
+
+/* Greeting */
+.hf-greet h2 {
+  font-size: 1.35rem;
+  font-weight: 800;
+}
+.hf-greet .muted {
+  font-size: 0.9rem;
+}
+
+/* Icon Button */
+.hf-icon-btn {
+  margin-left: auto;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 0;
+  background: var(--surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-soft);
+  cursor: pointer;
+  transition: var(--t);
+}
+
+.hf-icon-btn:hover {
+  transform: translateY(-2px);
+}
+
+/* ============================================================
+   VITALS RIBBON
+   ============================================================ */
+
+.hf-vitals-ribbon {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.vital-card {
+  background: var(--surface);
+  padding: 14px;
+  border-radius: var(--radius);
+  text-align: center;
+  box-shadow: var(--shadow-soft);
+  transition: var(--t);
+}
+
+.vital-card:hover {
+  transform: translateY(-3px);
+}
+
+.vital-value {
+  font-size: 1.4rem;
+  font-weight: 800;
+}
+
+.vital-label {
+  font-size: 0.78rem;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+/* ============================================================
+   CARDS (AI, records, insurance, etc.)
+   ============================================================ */
+
+.hf-card {
+  background: var(--surface);
+  padding: 18px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-ceramic);
+  margin-bottom: 22px;
+}
+
+.card-title {
+  font-size: 1.1rem;
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+
+/* AI Copilot */
+.ai-feed {
+  display: grid;
+  gap: 10px;
+}
+
+.ai-bubble {
+  background: var(--surface-strong);
+  padding: 12px 14px;
+  border-radius: 18px;
+  box-shadow: var(--shadow-soft);
+  line-height: 1.4;
+  border-left: 4px solid var(--mint);
+  animation: fadeInUp var(--t);
+}
+
+/* ============================================================
+   ACTION GRID
+   ============================================================ */
+
+.hf-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-bottom: 26px;
+}
+
+.hf-tile {
+  background: var(--surface);
+  padding: 18px 10px;
+  border-radius: var(--radius);
+  text-align: center;
+  box-shadow: var(--shadow-soft);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  transition: var(--t);
+}
+
+.hf-tile:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-glow);
+}
+
+.tile-icon {
+  font-size: 1.8rem;
+}
+
+.tile-label {
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+/* ============================================================
+   MINI BUTTONS
+   ============================================================ */
+
+.btn-mini {
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  border: 0;
+  border-radius: 10px;
+  background: var(--grad-mint-aqua);
+  color: #002034;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: var(--shadow-soft);
+}
+
+/* Link */
+.btn-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-weight: 800;
+  color: var(--aqua);
+}
+
+/* ============================================================
+   LISTS
+   ============================================================ */
+
+.rc-list {
+  list-style: none;
+  display: grid;
+  gap: 8px;
+}
+
+.ap-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ap-info p {
+  font-size: 0.9rem;
+}
+
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
