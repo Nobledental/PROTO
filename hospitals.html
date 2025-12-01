@@ -4,9 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
 
-  <title>HealthFlo — Doctors</title>
+  <title>HealthFlo — Hospitals</title>
   <link rel="stylesheet" href="styles.css" />
   <script defer src="main.js"></script>
+  <script defer src="provider-engine.js"></script>
 </head>
 
 <body>
@@ -25,25 +26,25 @@
 
 <!-- Section -->
 <section class="hf-section">
-  <h2 class="hf-title">Find a Doctor</h2>
+  <h2 class="hf-title">Find Hospitals</h2>
 
   <!-- Toolbar -->
   <div class="hf-toolbar">
-    <input id="doctorSearch" type="search" class="hf-search"
-      placeholder="Search doctors, specialties, symptoms…">
+    <input id="hospitalSearch" type="search" class="hf-search"
+      placeholder="Search hospitals, specialties, cashless…">
 
     <div class="hf-chip-row">
-      <button class="hf-chip active" data-specialty="all">All</button>
-      <button class="hf-chip" data-specialty="cardio">Cardiology</button>
-      <button class="hf-chip" data-specialty="neuro">Neurology</button>
-      <button class="hf-chip" data-specialty="ortho">Orthopedics</button>
-      <button class="hf-chip" data-specialty="gyn">Gynaecology</button>
-      <button class="hf-chip" data-specialty="ped">Pediatrics</button>
+      <button class="hf-chip active" data-filter="all">All</button>
+      <button class="hf-chip" data-filter="cashless">Cashless</button>
+      <button class="hf-chip" data-filter="cardio">Cardiac</button>
+      <button class="hf-chip" data-filter="ortho">Ortho</button>
+      <button class="hf-chip" data-filter="mother">Mother & Child</button>
+      <button class="hf-chip" data-filter="trauma">Trauma</button>
     </div>
   </div>
 
-  <!-- Doctors List -->
-  <div id="doctorList" class="hf-doctors">
+  <!-- Hospitals List -->
+  <div id="hospitalList" class="hf-doctors">
     <!-- Injected by JS -->
   </div>
 </section>
