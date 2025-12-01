@@ -270,5 +270,37 @@ $('#runSimulation')?.addEventListener('click', () => {
   toggleCopilot(true);
 });
 
+// Command board simulations
+const erEscalations = $('#erEscalations');
+const ipdEscalations = $('#ipdEscalations');
+const otEscalations = $('#otEscalations');
+const insuranceAging = $('#insuranceAging');
+const escalationInsight = $('#escalationInsight');
+const dischargeReady = $('#dischargeReady');
+const docsLocked = $('#docsLocked');
+const billingClean = $('#billingClean');
+const otTurnover = $('#otTurnover');
+const bedReleases = $('#bedReleases');
+const surgeSetup = $('#surgeSetup');
+function updateCommandBoard() {
+  const er = Math.random() > 0.8 ? '1 high' : '0 high';
+  const ipd = Math.random() > 0.5 ? '1 medium' : '0';
+  const ot = Math.random() > 0.6 ? '1 watch' : '0';
+  const aging = Math.floor(Math.random() * 16) + 18;
+  erEscalations && (erEscalations.textContent = er);
+  ipdEscalations && (ipdEscalations.textContent = ipd);
+  otEscalations && (otEscalations.textContent = ot);
+  insuranceAging && (insuranceAging.textContent = `${aging} mins`);
+  escalationInsight && (escalationInsight.textContent = aging > 28 ? 'AI nudging insurer desk and prepping escalation note.' : 'AI holding: no red cases; prepping intensivist standby.');
+  dischargeReady && (dischargeReady.textContent = Math.floor(Math.random() * 5) + 6);
+  docsLocked && (docsLocked.textContent = Math.floor(Math.random() * 4) + 8);
+  billingClean && (billingClean.textContent = Math.floor(Math.random() * 4) + 10);
+  otTurnover && (otTurnover.textContent = `${Math.floor(Math.random() * 10) + 18} mins`);
+  bedReleases && (bedReleases.textContent = `${Math.floor(Math.random() * 3) + 2} wards`);
+  surgeSetup && (surgeSetup.textContent = Math.random() > 0.85 ? 'Scaling' : 'Ready');
+}
+setInterval(updateCommandBoard, 3400);
+updateCommandBoard();
+
 // Keep active states on load
 updateActive('top');
