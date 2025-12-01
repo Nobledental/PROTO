@@ -2,18 +2,29 @@
 const $ = (s, el = document) => el.querySelector(s);
 const $$ = (s, el = document) => [...el.querySelectorAll(s)];
 
-// Theme switching
+// Theme switching across design presets
+const themes = ['white', 'dark', 'matte', 'cosmic'];
 const themeToggle = $('#themeToggle');
-if (themeToggle) {
-  themeToggle.addEventListener('click', () => {
-    const root = document.documentElement;
-    const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
-    root.dataset.theme = next;
-    localStorage.setItem('hfTheme', next);
-  });
+
+function applyTheme(theme) {
+  const target = themes.includes(theme) ? theme : 'white';
+  document.documentElement.dataset.theme = target;
+  localStorage.setItem('hfTheme', target);
+  if (themeToggle) {
+    themeToggle.textContent = target === 'white' ? '☀️' : target === 'dark' ? '🌙' : target === 'matte' ? '🧊' : '✨';
+    themeToggle.setAttribute('aria-label', `Switch theme (current: ${target})`);
+  }
 }
+
 const savedTheme = localStorage.getItem('hfTheme');
-if (savedTheme) document.documentElement.dataset.theme = savedTheme;
+applyTheme(savedTheme || 'white');
+
+themeToggle?.addEventListener('click', () => {
+  const current = document.documentElement.dataset.theme || 'white';
+  const idx = themes.indexOf(current);
+  const next = themes[(idx + 1) % themes.length];
+  applyTheme(next);
+});
 
 // Nav toggle (mobile)
 const navToggle = $('#navToggle');
