@@ -89,21 +89,30 @@ copilotInput?.addEventListener('keydown', (e) => {
   if (e.key === 'Enter') sendCopilot();
 });
 
-// Scroll interactions: highlight dock by section
-const sections = ['patient', 'hospital', 'insurance', 'admin'];
+// Scroll interactions: highlight dock and header nav by section
+const sections = ['patient', 'hospital', 'insurance', 'rcm', 'admin'];
 const dockItems = $$('.hf-dock .dock-item');
-if (dockItems.length) {
+const navLinks = $$('#primaryNav a');
+function updateActive(sectionId) {
+  dockItems.forEach(item => {
+    const href = item.getAttribute('href');
+    if (href && href.includes(sectionId)) item.classList.add('active');
+    else item.classList.remove('active');
+  });
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && href.includes(sectionId)) link.classList.add('active');
+    else link.classList.remove('active');
+  });
+}
+if (dockItems.length || navLinks.length) {
   window.addEventListener('scroll', () => {
     let active = 'patient';
     sections.forEach(id => {
       const el = document.getElementById(id);
       if (el && el.getBoundingClientRect().top <= 120) active = id;
     });
-    dockItems.forEach(item => {
-      const href = item.getAttribute('href');
-      if (href && href.includes(active)) item.classList.add('active');
-      else item.classList.remove('active');
-    });
+    updateActive(active);
   });
 }
 
@@ -153,4 +162,27 @@ $$('.hf-dock a[href^="#"]').forEach(link => {
     const target = document.querySelector(link.getAttribute('href'));
     if (target) target.scrollIntoView({ behavior: 'smooth' });
   });
+});
+
+// Header nav smooth scroll
+$('#primaryNav')?.addEventListener('click', (e) => {
+  const link = e.target.closest('a[href^="#"]');
+  if (!link) return;
+  e.preventDefault();
+  const target = document.querySelector(link.getAttribute('href'));
+  if (target) target.scrollIntoView({ behavior: 'smooth' });
+});
+
+// Search interactions
+const searchInput = $('#hfSearch');
+const searchCTA = $('#searchCTA');
+function runSearch() {
+  const q = searchInput?.value.trim();
+  if (!q) return;
+  appendBubble(`I’ll search across providers, policies, and claims for: “${q}”. Want me to reserve a slot or check cashless?`);
+  toggleCopilot(true);
+}
+searchCTA?.addEventListener('click', runSearch);
+searchInput?.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') runSearch();
 });
