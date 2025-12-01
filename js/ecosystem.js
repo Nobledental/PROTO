@@ -90,7 +90,7 @@ copilotInput?.addEventListener('keydown', (e) => {
 });
 
 // Scroll interactions: highlight dock and header nav by section
-const sections = ['patient', 'hospital', 'insurance', 'rcm', 'admin'];
+const sections = ['patient', 'hospital', 'insurance', 'rcm', 'network', 'guardian', 'admin'];
 const dockItems = $$('.hf-dock .dock-item');
 const navLinks = $$('#primaryNav a');
 function updateActive(sectionId) {
