@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HealthFlo — Appointments</title>
+
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="main.js"></script>
+</head>
+
+<body>
+
+<header class="hf-header">
+  <div class="hf-header-left">
+    <a href="dashboard.html" class="hf-logo">
+      <span class="logo-dot"></span> HealthFlo
+    </a>
+  </div>
+  <div class="hf-header-right">
+    <button class="hf-icon-btn">🌗</button>
+  </div>
+</header>
+
+<section class="hf-section">
+  <h2 class="hf-title">Your Appointments</h2>
+
+  <div class="appt-actions">
+    <input type="search" class="hf-search" placeholder="Search doctors / specialties / hospitals">
+    <a class="btn-mini" href="doctors.html">Book New</a>
+  </div>
+
+  <div id="appt-list" class="appt-list">
+    <!-- Filled automatically by main.js -->
+  </div>
+</section>
+
+<footer class="hf-footer">
+  <a href="dashboard.html">🏠</a>
+  <a href="appointments.html" class="active">📅</a>
+  <a href="hospitals.html">🏥</a>
+  <a href="medicines.html">💊</a>
+  <a href="profile.html">👤</a>
+</footer>
+
+</body>
+</html>
