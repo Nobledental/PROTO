@@ -52,25 +52,21 @@
         <button class="btn-mini" id="searchCTA">Search</button>
         <small class="muted">Examples: “Cashless cardiology at Fortis”, “TPA status for Apollo claim”, “Book home physio in Koramangala”.</small>
       </div>
-      <div class="hero-cta">
-        <a class="btn-primary" href="#patient">Open Patient OS</a>
-        <a class="btn-ghost" href="#hospital">Explore Hospital OS</a>
-      </div>
       <div class="hero-metrics">
         <div class="metric">
-          <strong>5.2M</strong>
+          <strong data-counter="5200000" data-format="compact">0</strong>
           <span>Active patients</span>
         </div>
         <div class="metric">
-          <strong>1,240</strong>
+          <strong data-counter="1240">0</strong>
           <span>Hospitals live</span>
         </div>
         <div class="metric">
-          <strong>98.4%</strong>
+          <strong data-counter="98.4" data-suffix="%">0%</strong>
           <span>Cashless success</span>
         </div>
         <div class="metric">
-          <strong>11m</strong>
+          <strong data-counter="11" data-suffix="m">0m</strong>
           <span>Avg. ambulance ETA</span>
         </div>
       </div>
@@ -95,6 +91,57 @@
           <li>Audit-ready documents synced to insurer & patient vault.</li>
         </ul>
         <button class="btn-primary" id="openInsurance">Open Insurance OS</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="hf-section" id="experience">
+    <div class="section-head">
+      <div>
+        <p class="badge">Experience Control Center</p>
+        <h2>Orchestrate every persona with transparent guardrails.</h2>
+        <p class="muted">See live readiness for patients, hospitals, insurers, and RCM teams with AI-verified SLAs, continuity rails, and next-best actions in one frosted console.</p>
+      </div>
+      <div class="section-actions">
+        <button class="btn-ghost" data-cta="health check">Run health check</button>
+        <button class="btn-primary" data-cta="launch playbook">Launch playbook</button>
+      </div>
+    </div>
+    <div class="hf-grid">
+      <div class="hf-card tile">
+        <h3>Continuity rail</h3>
+        <p class="muted">Discovery → consult → cashless → discharge → reimbursement. AI keeps every hop in lockstep.</p>
+        <ul class="bullet-list">
+          <li><strong>Discovery</strong> — Search + doctor prep notes auto-sent to family.</li>
+          <li><strong>Insurance</strong> — Eligibility + room-rent guard + pre-auth timer synced.</li>
+          <li><strong>Care</strong> — Vitals, labs, meds mirror to insurer and family dashboards.</li>
+          <li><strong>Finance</strong> — EMI offers and co-pay projections surfaced before billing.</li>
+        </ul>
+        <div class="mini-row"><span>Live rail</span><strong id="railStatus">All steps green • No dropped handoffs</strong></div>
+      </div>
+      <div class="hf-card tile">
+        <h3>Persona focus</h3>
+        <p class="muted" id="personaStory">Patient view: AI shields family members, books follow-ups, and preps insurance packets.</p>
+        <div class="mini-grid">
+          <div class="mini-card"><span>Cashless SLA</span><strong id="cashlessSla">29 mins</strong><small>IRDAI compliant</small></div>
+          <div class="mini-card"><span>Vitals uptime</span><strong id="vitalsUptime">99.8%</strong><small>IoMT synced</small></div>
+          <div class="mini-card"><span>Claim-ready</span><strong id="claimReady">14 cases</strong><small>Audit-locked</small></div>
+        </div>
+        <div class="inline-actions">
+          <button data-cta="persona deep-dive">Persona deep-dive</button>
+          <button data-cta="share briefing">Share briefing</button>
+        </div>
+      </div>
+      <div class="hf-card tile">
+        <h3>System health & SLAs</h3>
+        <p class="muted">Proactive risk sensing for ambulance ETAs, insurer responses, and device connectivity.</p>
+        <div class="vitals-stack" id="systemHealth">
+          <div class="vital-row"><span>Cashless approvals</span><strong id="slaCashless">97%</strong><small>Under 45 mins</small></div>
+          <div class="vital-row"><span>Device link</span><strong id="deviceLink">99.8%</strong><small>Wearables live</small></div>
+          <div class="vital-row"><span>Ambulance grid</span><strong id="ambulanceGrid">11m ETA</strong><small>3 high-priority</small></div>
+          <div class="vital-row"><span>RCM risk</span><strong id="rcmRisk">Low</strong><small>Denial guard active</small></div>
+        </div>
+        <p class="ai-note" id="systemInsight">AI watching: no SLA breaches; pushing pre-emptive insurer nudges.</p>
       </div>
     </div>
   </section>
