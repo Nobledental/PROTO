@@ -75,6 +75,58 @@
     </div>
   </section>
 
+  <section class="hf-section" id="integrity">
+    <div class="section-head">
+      <div>
+        <p class="badge">Revenue Integrity Cockpit</p>
+        <h2>Non-payable detection, audit locks, and SLA-aware billing queues.</h2>
+        <p class="muted">AI grades every bill for risk, highlights deductions, and keeps insurance + patient splits transparent before discharge.</p>
+      </div>
+      <div class="section-actions">
+        <button class="btn-ghost" data-cta="share audit kit">Share audit kit</button>
+        <button class="btn-primary" data-cta="activate risk guard">Activate risk guard</button>
+      </div>
+    </div>
+    <div class="hf-grid">
+      <div class="hf-card tile">
+        <h3>Risk radar</h3>
+        <p class="muted">Identifies sub-limits, missing codes, and device/implant exceptions across IPD, OT, and pharmacy.</p>
+        <div class="mini-grid">
+          <div class="mini-card"><span>Risk score</span><strong id="riskScore">12%</strong><small>Target &lt; 15%</small></div>
+          <div class="mini-card"><span>Non-payables</span><strong id="nonPayableRate">0%</strong><small>Flagged early</small></div>
+          <div class="mini-card"><span>Audit locks</span><strong id="auditLocks">18</strong><small>Cases sealed</small></div>
+        </div>
+        <p class="ai-note" id="riskInsight">AI: No sub-limit breach; room rent validated to policy rules.</p>
+      </div>
+      <div class="hf-card tile">
+        <h3>Scenario switcher</h3>
+        <p class="muted">Toggle cashless vs reimbursement to see patient OOP, insurer share, and EMI guidance instantly.</p>
+        <div class="hf-chip-row" id="scenarioSwitch">
+          <button class="hf-chip active" data-scenario="cashless">Cashless</button>
+          <button class="hf-chip" data-scenario="reimbursement">Reimbursement</button>
+          <button class="hf-chip" data-scenario="self-pay">Self-pay + EMI</button>
+        </div>
+        <div class="mini-row"><span>Patient pays</span><strong id="patientPayScenario">₹0</strong><small>Includes co-pay & deductions</small></div>
+        <div class="mini-row"><span>Insurer pays</span><strong id="insurerPayScenario">₹0</strong><small>Post non-payables</small></div>
+        <div class="mini-row"><span>SLA</span><strong id="scenarioSla">0 mins</strong><small>Pre-auth or courier</small></div>
+        <div class="inline-actions">
+          <button data-cta="apply scenario">Apply scenario</button>
+          <button data-cta="send breakdown">Send breakdown</button>
+        </div>
+      </div>
+      <div class="hf-card tile">
+        <h3>Queue health</h3>
+        <p class="muted">Discharge queue, pharmacy reconciliations, and lab bundle billing readiness at a glance.</p>
+        <div class="vitals-stack">
+          <div class="vital-row"><span>Discharge queue</span><strong id="dischargeQueue">0</strong><small>Pre-audited</small></div>
+          <div class="vital-row"><span>Pharmacy batches</span><strong id="batchHealth">0%</strong><small>Mapped to bills</small></div>
+          <div class="vital-row"><span>Lab bundles</span><strong id="labBundles">0</strong><small>Panels bundled</small></div>
+          <div class="vital-row"><span>Payment splits</span><strong id="splitHealth">Clean</strong><small>Cash/Card/UPI</small></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section id="hospitalBilling" class="hf-section">
     <div class="section-head">
       <div>
