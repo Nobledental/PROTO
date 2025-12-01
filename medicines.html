@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HealthFlo — Medicines</title>
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="main.js"></script>
+</head>
+
+<body>
+
+<header class="hf-header">
+  <a href="dashboard.html" class="hf-logo"><span class="logo-dot"></span> HealthFlo</a>
+  <button id="themeToggle" class="hf-icon-btn">🌗</button>
+</header>
+
+<section class="hf-section">
+  <h2 class="hf-title">Medicines & Pharmacy</h2>
+
+  <div class="hf-toolbar">
+    <input id="medSearch" class="hf-search" placeholder="Search medicines, salts, conditions…">
+
+    <div class="hf-chip-row">
+      <button class="hf-chip active" data-filter="all">All</button>
+      <button class="hf-chip" data-filter="rx">Prescription</button>
+      <button class="hf-chip" data-filter="otc">OTC</button>
+      <button class="hf-chip" data-filter="nearby">Nearby Pharmacy</button>
+    </div>
+  </div>
+
+  <div id="medList" class="hf-meds">
+    <!-- Filled by JS -->
+  </div>
+</section>
+
+<footer class="hf-footer">
+  <a href="dashboard.html">🏠</a>
+  <a href="appointments.html">📅</a>
+  <a href="hospitals.html">🏥</a>
+  <a href="medicines.html" class="active">💊</a>
+  <a href="profile.html">👤</a>
+</footer>
+
+</body>
+</html>
