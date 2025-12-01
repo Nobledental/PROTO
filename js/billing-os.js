@@ -308,6 +308,10 @@ function computeTotals() {
   $('#roundOff').textContent = formatINR(roundOff);
   $('#netPayable').textContent = formatINR(Math.max(0, rounded));
 
+  $('#patientPayScenario')?.textContent = formatINR(patientPay);
+  $('#insurerPayScenario')?.textContent = formatINR(insuranceShare);
+  $('#scenarioSla')?.textContent = insuranceShare > 0 ? 'Cashless • <35 mins' : 'Reimbursement • 9 days';
+
   $('#unbilledValue').textContent = formatINR(hospitalTotals.total + room.total);
   $('#cashlessValue').textContent = formatINR(insuranceShare);
   $('#pharmacyValue').textContent = formatINR(pharmacyTotals.total);
@@ -327,6 +331,53 @@ computeTotals();
     document.getElementById(id)?.addEventListener('change', computeTotals);
   });
 $('#recalcBtn')?.addEventListener('click', computeTotals);
+
+// Scenario switcher
+const scenarioSwitch = $('#scenarioSwitch');
+const scenarioPlans = {
+  cashless: { coverage: 90, deductible: 0 },
+  reimbursement: { coverage: 70, deductible: 5000 },
+  'self-pay': { coverage: 0, deductible: 0 }
+};
+scenarioSwitch?.addEventListener('click', (e) => {
+  const btn = e.target.closest('.hf-chip');
+  if (!btn) return;
+  $$('.hf-chip', scenarioSwitch).forEach(chip => chip.classList.remove('active'));
+  btn.classList.add('active');
+  const plan = scenarioPlans[btn.dataset.scenario];
+  if (plan) {
+    const coverageInput = $('#coveragePct');
+    const deductibleInput = $('#deductible');
+    if (coverageInput) coverageInput.value = plan.coverage;
+    if (deductibleInput) deductibleInput.value = plan.deductible;
+    computeTotals();
+  }
+});
+
+// Integrity cockpit simulations
+const riskScore = $('#riskScore');
+const nonPayableRate = $('#nonPayableRate');
+const auditLocks = $('#auditLocks');
+const riskInsight = $('#riskInsight');
+const dischargeQueue = $('#dischargeQueue');
+const batchHealth = $('#batchHealth');
+const labBundles = $('#labBundles');
+const splitHealth = $('#splitHealth');
+function updateIntegrity() {
+  const risk = (8 + Math.random() * 8).toFixed(1);
+  const nonPay = (Math.random() * 2).toFixed(1);
+  const locks = Math.floor(Math.random() * 6) + 14;
+  riskScore && (riskScore.textContent = `${risk}%`);
+  nonPayableRate && (nonPayableRate.textContent = `${nonPay}%`);
+  auditLocks && (auditLocks.textContent = locks);
+  riskInsight && (riskInsight.textContent = nonPay < 1 ? 'AI: No sub-limit breach; room rent validated to policy rules.' : 'AI flagged non-payables — pushing admin approval and insurer note.');
+  dischargeQueue && (dischargeQueue.textContent = Math.floor(Math.random() * 6) + 8);
+  batchHealth && (batchHealth.textContent = `${(96 + Math.random() * 3).toFixed(1)}%`);
+  labBundles && (labBundles.textContent = Math.floor(Math.random() * 8) + 18);
+  splitHealth && (splitHealth.textContent = Math.random() > 0.8 ? 'Adjusting' : 'Clean');
+}
+setInterval(updateIntegrity, 3200);
+updateIntegrity();
 
 // Copilot chat
 const copilotFab = $('#copilotFab');
