@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HealthFlo — Vitals</title>
+
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="main.js"></script>
+</head>
+
+<body>
+
+<header class="hf-header">
+  <a href="dashboard.html" class="hf-logo"><span class="logo-dot"></span> HealthFlo</a>
+  <button id="themeToggle" class="hf-icon-btn">🌗</button>
+</header>
+
+<section class="hf-section">
+  <h2 class="hf-title">Vitals Monitoring</h2>
+
+  <div class="vital-grid">
+
+    <div class="vital-card">
+      <h3>Heart Rate</h3>
+      <div id="hrValue" class="vital-value">-- bpm</div>
+      <canvas id="hrChart"></canvas>
+    </div>
+
+    <div class="vital-card">
+      <h3>SpO₂</h3>
+      <div id="spoValue" class="vital-value">-- %</div>
+      <canvas id="spoChart"></canvas>
+    </div>
+
+    <div class="vital-card">
+      <h3>Blood Pressure</h3>
+      <div class="vital-value"><span id="bpSys">--</span>/<span id="bpDia">--</span></div>
+      <canvas id="bpChart"></canvas>
+    </div>
+
+    <div class="vital-card">
+      <h3>Sugar (CGM)</h3>
+      <div id="sugarValue" class="vital-value">-- mg/dL</div>
+      <canvas id="sugarChart"></canvas>
+    </div>
+
+  </div>
+</section>
+
+<footer class="hf-footer">
+  <a href="dashboard.html">🏠</a>
+  <a href="vitals.html" class="active">❤️</a>
+  <a href="records.html">📁</a>
+  <a href="profile.html">👤</a>
+</footer>
+
+</body>
+</html>
