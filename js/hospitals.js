@@ -279,6 +279,9 @@ const STATE = {
   tag: '',          // chip filter: 'OPD', 'IPD', etc
   city: '',
   specialty: '',
+  sort: 'rating',
+  savedOnly: false,
+  view: 'grid',
   favs: new Set(),
 };
 
@@ -301,8 +304,27 @@ function renderGrid(list){
     const img = qs('figure img', node);
     img.src = h.image; img.alt = `${h.name} photo`;
 
+    const favBtn = qs('.fav-toggle', node);
+    const isFav = STATE.favs.has(h.id);
+    favBtn.setAttribute('aria-pressed', isFav ? 'true' : 'false');
+    favBtn.textContent = isFav ? '♥' : '♡';
+    favBtn.addEventListener('click', ()=>{
+      if(STATE.favs.has(h.id)){ STATE.favs.delete(h.id); favBtn.textContent='♡'; favBtn.setAttribute('aria-pressed','false'); }
+      else { STATE.favs.add(h.id); favBtn.textContent='♥'; favBtn.setAttribute('aria-pressed','true'); toast('Saved to your list'); }
+      applyFilters();
+    });
+
     qs('.card-title', node).textContent = h.name;
     qs('.card-city', node).textContent = `${h.city}`;
+    qs('.card-area', node).textContent = h.area;
+
+    const chip = qs('.card-chip', node);
+    if(Number(h.rating) >= 4.6) chip.textContent = 'Top rated';
+    else chip.textContent = 'Partner hospital';
+    qs('.rating-badge', node).textContent = `⭐ ${h.rating}`;
+    const muted = qsa('.muted-badge', node);
+    if(muted[0]) muted[0].textContent = `${h.specialties.length} specialties`;
+    if(muted[1]) muted[1].textContent = `${h.packages.length} packages`;
 
     const sub = qs('.card-sub', node);
     sub.textContent = `${h.specialties.slice(0,3).join(', ')} • ` +
@@ -330,6 +352,7 @@ function renderGrid(list){
 
   grid.appendChild(frag);
   updateMetrics(list);
+  updateViewMode();
 }
 
 function updateMetrics(list){
@@ -340,9 +363,27 @@ function updateMetrics(list){
   const mP = qs('#metricPackages'); if(mP) mP.textContent = `${pkgs}+`;
 }
 
+function updateResultMeta(){
+  const count = qs('#resultCount');
+  const city = qs('#activeCity');
+  const spec = qs('#activeSpec');
+  if(count) count.textContent = `${STATE.filtered.length} hospital${STATE.filtered.length===1?'':'s'}`;
+  if(city) city.textContent = STATE.city || 'All India';
+  if(spec) spec.textContent = STATE.specialty || 'All specialities';
+}
+
+function updateViewMode(){
+  const grid = qs('#hospitalGrid');
+  if(!grid) return;
+  const isList = STATE.view === 'list';
+  grid.classList.toggle('is-list', isList);
+  const btn = qs('#toggleView');
+  if(btn) btn.textContent = isList ? 'Card View' : 'List View';
+}
+
 /* ------------------ Filtering ------------------ */
 function applyFilters(){
-  const { hospitals, query, tag, city, specialty } = STATE;
+  const { hospitals, query, tag, city, specialty, savedOnly, sort } = STATE;
   const q = query.trim().toLowerCase();
 
   let list = hospitals.filter(h => {
@@ -361,11 +402,21 @@ function applyFilters(){
       ].join(' ').toLowerCase();
       if(!hay.includes(q)) return false;
     }
+    if(savedOnly && !STATE.favs.has(h.id)) return false;
     return true;
   });
 
+  const sorter = {
+    rating: (a,b) => Number(b.rating) - Number(a.rating),
+    packages: (a,b) => (b.packages?.length||0) - (a.packages?.length||0),
+    specialties: (a,b) => (b.specialties?.length||0) - (a.specialties?.length||0),
+    name: (a,b) => a.name.localeCompare(b.name)
+  }[sort] || (()=>0);
+  list = list.slice().sort(sorter);
+
   STATE.filtered = list;
   renderGrid(list);
+  updateResultMeta();
 }
 
 /* ------------------ Modal: Hospital ------------------ */
@@ -693,7 +744,14 @@ function initFilters(){
   const search = qs('#searchInput');
   const citySel = qs('#cityFilter');
   const specSel = qs('#specialtyFilter');
+  const sortSel = qs('#sortSelect');
   const chips = qsa('.chip');
+  const savedToggle = qs('#toggleSavedOnly');
+  const clearBtn = qs('#clearFilters');
+  const viewBtn = qs('#toggleView');
+  const savedBtn = qs('#btnSaved');
+  const shareBtn = qs('#btnShareFilters');
+  const conciergeBtn = qs('#btnConcierge');
 
   // Chips
   chips.forEach(chip=>{
@@ -720,6 +778,69 @@ function initFilters(){
     STATE.specialty = specSel.value || '';
     applyFilters();
   });
+  sortSel.addEventListener('change', ()=>{
+    STATE.sort = sortSel.value;
+    applyFilters();
+  });
+
+  // Saved toggle
+  if(savedToggle){
+    savedToggle.addEventListener('change', ()=>{
+      STATE.savedOnly = savedToggle.checked;
+      applyFilters();
+    });
+  }
+
+  if(savedBtn){
+    savedBtn.addEventListener('click', ()=>{
+      if(!STATE.favs.size) toast('Save a hospital to see it here.');
+      STATE.savedOnly = true;
+      if(savedToggle) savedToggle.checked = true;
+      applyFilters();
+    });
+  }
+
+  if(clearBtn){
+    clearBtn.addEventListener('click', ()=>{
+      STATE.query=''; STATE.city=''; STATE.specialty=''; STATE.tag='';
+      STATE.savedOnly=false; STATE.sort='rating';
+      search.value=''; citySel.value=''; specSel.value=''; sortSel.value='rating';
+      chips.forEach(c=>c.classList.remove('is-active'));
+      if(savedToggle) savedToggle.checked=false;
+      applyFilters();
+    });
+  }
+
+  if(viewBtn){
+    viewBtn.addEventListener('click', ()=>{
+      STATE.view = STATE.view === 'grid' ? 'list' : 'grid';
+      updateViewMode();
+    });
+  }
+
+  if(shareBtn){
+    shareBtn.addEventListener('click', async ()=>{
+      const parts = [
+        `Hospitals — ${STATE.city||'All cities'}`,
+        STATE.specialty || 'All specialities'
+      ];
+      if(STATE.tag) parts.push(STATE.tag);
+      const summary = parts.join(' • ');
+      if(navigator.share){
+        try{ await navigator.share({ title:'HealthFlo filters', text: summary, url: location.href.split('#')[0] }); }
+        catch(e){}
+      }else{
+        const ok = await copyText(summary);
+        toast(ok ? 'Filter summary copied' : 'Copy failed');
+      }
+    });
+  }
+
+  if(conciergeBtn){
+    conciergeBtn.addEventListener('click', ()=>{
+      toast('A care guide will call you in under 10 minutes.');
+    });
+  }
 
   // Search
   const onQuery = debounce(()=>{
@@ -747,6 +868,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Render grid
   renderGrid(STATE.filtered);
+  updateResultMeta();
+  updateViewMode();
 
   // Bind UI
   bindModalGlobal();
