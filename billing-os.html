@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HealthFlo Billing OS — Denial-Proof Revenue</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script defer src="js/billing-os.js"></script>
+</head>
+<body>
+  <header class="hf-header">
+    <div class="hf-header-inner">
+      <div class="hf-logo"><span class="logo-dot"></span>HealthFlo Billing OS</div>
+      <nav class="hf-nav" id="primaryNav">
+        <a href="#hospitalBilling">Hospital</a>
+        <a href="#pharmacyBilling">Pharmacy</a>
+        <a href="#labBilling">Lab</a>
+        <a href="#consultantBilling">Consultant & OT</a>
+        <a href="#packageBilling">Packages</a>
+        <a href="#payments">Payments</a>
+      </nav>
+      <div class="hf-nav-actions">
+        <button id="navToggle" class="hf-icon-btn">☰</button>
+        <button id="themeToggle" class="hf-icon-btn">🌗</button>
+      </div>
+    </div>
+    <div class="hf-ticker" id="hfTicker">
+      <div class="ticker-track">
+        <span>Discharge queue: 12 bills pre-audited • 0 denials</span>
+        <span>Cashless: 9 approvals in progress • Avg TAT 27 mins</span>
+        <span>OT billing: 3 cases in theatre • Implants tracked live</span>
+        <span>Pharmacy: 98% batches mapped • GST inclusive pricing clean</span>
+        <span>Lab/Radiology: 24 panels bundled • Corporate pricing applied</span>
+      </div>
+    </div>
+  </header>
+
+  <section class="hf-hero" id="top">
+    <div class="hero-content">
+      <p class="badge">NABH-ready • IRDAI-aligned • Auditor-approved</p>
+      <h1>Billing OS that protects margin, speeds discharge, and keeps claims clean.</h1>
+      <p class="muted">From OPD to IPD to OT to pharmacy and labs, HealthFlo Billing OS auto-applies GST, discounts with approval, insurance splits, and round-off. Multi-mode payments stay reconciled; AI predicts non-payables before the claim goes out.</p>
+      <div class="hero-cta">
+        <a class="btn-primary" href="#hospitalBilling">Start a bill</a>
+        <a class="btn-ghost" id="openCopilot">Ask Billing Copilot</a>
+      </div>
+      <div class="hero-metrics">
+        <div class="metric"><strong>₹18.6L</strong><span>Avg. daily IPD billing</span></div>
+        <div class="metric"><strong>99.3%</strong><span>Clean-claim rate</span></div>
+        <div class="metric"><strong>11m</strong><span>Discharge TAT</span></div>
+        <div class="metric"><strong>2.4k</strong><span>OPD bills/day</span></div>
+      </div>
+    </div>
+    <div class="hero-pane">
+      <div class="frosted-card" id="billingSummaryCard">
+        <h3>Billing snapshot</h3>
+        <div class="vitals-stack">
+          <div class="vital-row"><span>IPD Unbilled</span><strong id="unbilledValue">₹0</strong><small>Awaiting doctor sign-off</small></div>
+          <div class="vital-row"><span>Cashless</span><strong id="cashlessValue">₹0</strong><small>Approvals in queue</small></div>
+          <div class="vital-row"><span>Pharmacy</span><strong id="pharmacyValue">₹0</strong><small>Batch-linked</small></div>
+          <div class="vital-row"><span>Round-off</span><strong id="roundOffValue">₹0</strong><small>Nearest rupee</small></div>
+        </div>
+        <div class="ai-note" id="aiPulse">AI: No sub-limit breach; room rent validated to policy rules.</div>
+        <button class="btn-mini" id="recalcBtn">Recalculate</button>
+      </div>
+      <div class="frosted-card">
+        <h3>Command shortcuts</h3>
+        <div class="quick-actions">
+          <button data-cta="Trigger cashless preauth">Cashless preauth</button>
+          <button data-cta="Apply admin discount">Admin discount</button>
+          <button data-cta="Reconcile pharmacy batches">Reconcile pharmacy</button>
+          <button data-cta="Generate final bill PDF">Final bill PDF</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="hospitalBilling" class="hf-section">
+    <div class="section-head">
+      <div>
+        <p class="badge">Hospital Billing — OPD, IPD, Procedures</p>
+        <h2>Room rent, procedures, consumables, and nursing—auto-linked to insurance rules.</h2>
+        <p class="muted">Capture admissions, OT events, consumables, implants, and nursing charges with GST clarity. Auto-detect non-payables, deduct advances, and keep the final bill discharge-ready.</p>
+      </div>
+      <div class="hf-chip-row">
+        <button class="hf-chip" data-cta="Add OPD bill">Add OPD</button>
+        <button class="hf-chip" data-cta="Start IPD discharge">Start discharge</button>
+        <button class="hf-chip" data-cta="Attach surgeon fee">Attach surgeon fee</button>
+      </div>
+    </div>
+    <div class="tile-grid two">
+      <div class="frosted-card">
+        <div class="section-subhead">
+          <h3>Patient & stay</h3>
+          <div class="tag">Room rent calculator</div>
+        </div>
+        <div class="form-grid">
+          <label>Patient Name<input id="patientName" value="Aarav Menon" /></label>
+          <label>MRN<input id="mrn" value="MRN-208344" /></label>
+          <label>Admission<input id="admitTime" type="datetime-local" /></label>
+          <label>Discharge<input id="dischargeTime" type="datetime-local" /></label>
+          <label>Room Type<select id="roomType"><option value="General">General Ward</option><option value="Semi">Semi-Private</option><option value="Private">Private Room</option><option value="ICU">ICU</option></select></label>
+          <label>Room Rent / day<input id="roomRate" type="number" value="6500" /></label>
+        </div>
+        <div class="mini-grid">
+          <div class="mini-card"><span>Stay Hours</span><strong id="stayHours">0h</strong><small>Calculated</small></div>
+          <div class="mini-card"><span>Room Rent</span><strong id="roomRentValue">₹0</strong><small>Auto GST</small></div>
+          <div class="mini-card"><span>Advances</span><strong id="advanceValue">₹15,000</strong><small>To be adjusted</small></div>
+        </div>
+        <p class="ai-note">AI cross-checks: room rent vs policy sub-limit; ICU uplift auto-applied.</p>
+      </div>
+      <div class="frosted-card">
+        <div class="section-subhead">
+          <h3>Charges & consumables</h3>
+          <div class="tag">OPD/IPD + OT</div>
+        </div>
+        <table class="hf-table">
+          <thead><tr><th>Item</th><th>Qty</th><th>Rate</th><th>GST%</th><th>Total</th></tr></thead>
+          <tbody id="hospitalChargeRows"></tbody>
+        </table>
+        <div class="table-foot" id="hospitalTotals"></div>
+        <div class="inline-actions">
+          <button data-cta="Add consumable">Add consumable</button>
+          <button data-cta="Mark non-payable">Mark non-payable</button>
+          <button data-cta="Lock final bill">Lock bill</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pharmacyBilling" class="hf-section">
+    <div class="section-head">
+      <div>
+        <p class="badge">Pharmacy Billing — MRP, batch, GST</p>
+        <h2>Prescription and walk-in billing with batch accuracy.</h2>
+        <p class="muted">Pick batches, honor MRP, apply GST-inclusive pricing, and sync inventory. UPI/card/cash split instantly.</p>
+      </div>
+      <div class="hf-chip-row">
+        <button class="hf-chip active" data-cta="Prescription billing">Prescription</button>
+        <button class="hf-chip" data-cta="Walk-in billing">Walk-in</button>
+        <button class="hf-chip" data-cta="Batch reconciliation">Batch reconciliation</button>
+      </div>
+    </div>
+    <div class="tile-grid two">
+      <div class="frosted-card">
+        <div class="search-bar"><input id="pharmacySearch" placeholder="Search medicine, salt, or batch" /></div>
+        <div class="list" id="pharmacyList"></div>
+      </div>
+      <div class="frosted-card">
+        <div class="section-subhead">
+          <h3>Basket</h3>
+          <div class="tag">GST inclusive</div>
+        </div>
+        <table class="hf-table">
+          <thead><tr><th>Drug</th><th>Qty</th><th>MRP</th><th>GST%</th><th>Total</th></tr></thead>
+          <tbody id="pharmacyRows"></tbody>
+        </table>
+        <div class="table-foot" id="pharmacyTotals"></div>
+        <p class="ai-note" id="pharmacyInsight">AI: Insulin vial mapped to cold-chain batch; discount blocked.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="labBilling" class="hf-section">
+    <div class="section-head">
+      <div>
+        <p class="badge">Lab & Radiology Billing</p>
+        <h2>Panels, packages, sample fees, and corporate pricing.</h2>
+        <p class="muted">Bundle CBC+CRP, attach panel tests, add sample collection and radiology consumables. ICD/LOINC optional for payer-ready claims.</p>
+      </div>
+      <div class="hf-chip-row">
+        <button class="hf-chip active" data-cta="Add panels">Panels</button>
+        <button class="hf-chip" data-cta="Add sample fee">Sample fee</button>
+        <button class="hf-chip" data-cta="Corporate pricing">Corporate</button>
+      </div>
+    </div>
+    <div class="tile-grid two">
+      <div class="frosted-card">
+        <h3>Test selection</h3>
+        <div class="list" id="labList"></div>
+      </div>
+      <div class="frosted-card">
+        <h3>Billing</h3>
+        <table class="hf-table">
+          <thead><tr><th>Test/Panel</th><th>Qty</th><th>Rate</th><th>GST%</th><th>Total</th></tr></thead>
+          <tbody id="labRows"></tbody>
+        </table>
+        <div class="table-foot" id="labTotals"></div>
+        <p class="ai-note" id="labInsight">AI: Suggest bundle as Fever Panel to reduce leak and denial risk.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="consultantBilling" class="hf-section">
+    <div class="section-head">
+      <div>
+        <p class="badge">Consultant, OT & Procedure Billing</p>
+        <h2>Consults, OT time, anaesthesia, implants, and nursing assists.</h2>
+        <p class="muted">Auto-add doctor fees by specialty, OT hourly blocks, equipment usage, and implant charges. Follow-up window discounts honored.</p>
+      </div>
+      <div class="hf-chip-row">
+        <button class="hf-chip" data-cta="Add surgeon">Add surgeon</button>
+        <button class="hf-chip" data-cta="Add OT block">Add OT block</button>
+        <button class="hf-chip" data-cta="Implant capture">Implant capture</button>
+      </div>
+    </div>
+    <div class="tile-grid two">
+      <div class="frosted-card">
+        <h3>Consultations</h3>
+        <div class="list" id="consultList"></div>
+      </div>
+      <div class="frosted-card">
+        <h3>OT & procedure charges</h3>
+        <table class="hf-table">
+          <thead><tr><th>Item</th><th>Qty</th><th>Rate</th><th>GST%</th><th>Total</th></tr></thead>
+          <tbody id="consultRows"></tbody>
+        </table>
+        <div class="table-foot" id="consultTotals"></div>
+        <p class="ai-note" id="consultInsight">AI: OT block within pre-approved hours; anaesthesia top-up recommended.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="packageBilling" class="hf-section">
+    <div class="section-head">
+      <div>
+        <p class="badge">Package Billing</p>
+        <h2>Predefined packages with variance capture.</h2>
+        <p class="muted">C-Section, CABG, Knee Replacement packages with inclusions, exclusions, and variance for consumables not covered. Audit view ready for finance and payer review.</p>
+      </div>
+      <div class="hf-chip-row">
+        <button class="hf-chip" data-cta="Apply package">Apply package</button>
+        <button class="hf-chip" data-cta="Add exclusion">Add exclusion</button>
+        <button class="hf-chip" data-cta="Variance review">Variance review</button>
+      </div>
+    </div>
+    <div class="tile-grid two">
+      <div class="frosted-card">
+        <h3>Packages</h3>
+        <div class="list" id="packageList"></div>
+      </div>
+      <div class="frosted-card">
+        <h3>Inclusions & variance</h3>
+        <ul class="bullet-list" id="packageDetails"></ul>
+        <div class="mini-grid">
+          <div class="mini-card"><span>Package Price</span><strong id="packagePrice">₹0</strong><small>GST incl.</small></div>
+          <div class="mini-card"><span>Variance</span><strong id="packageVariance">₹0</strong><small>Consumables out</small></div>
+          <div class="mini-card"><span>Final</span><strong id="packageFinal">₹0</strong><small>Ready to post</small></div>
+        </div>
+        <p class="ai-note" id="packageInsight">AI: One implant billed outside package; mark as variance.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="payments" class="hf-section">
+    <div class="section-head">
+      <div>
+        <p class="badge">Payments, Insurance Split, Round-off</p>
+        <h2>Multi-mode payments with insurance clarity.</h2>
+        <p class="muted">Apply discounts with approval, split between payer and patient, deduct advances, and reconcile UPI/card/cash. Round-off auto-applies to the nearest rupee.</p>
+      </div>
+      <div class="hf-chip-row">
+        <button class="hf-chip" data-cta="Send payment link">Payment link</button>
+        <button class="hf-chip" data-cta="Share bill PDF">Share PDF</button>
+        <button class="hf-chip" data-cta="Push to ERP">Push to ERP</button>
+      </div>
+    </div>
+    <div class="tile-grid two">
+      <div class="frosted-card">
+        <div class="form-grid">
+          <label>Discount % (admin only)<input id="discountPct" type="number" value="8" /></label>
+          <label>Insurance Coverage %<input id="coveragePct" type="number" value="85" /></label>
+          <label>Non-payables<input id="nonPayable" type="number" value="5000" /></label>
+          <label>Advance Collected<input id="advanceInput" type="number" value="15000" /></label>
+          <label>Insurance Deductible<input id="deductible" type="number" value="2000" /></label>
+        </div>
+        <div class="payment-modes">
+          <div><label>Cash<input id="cashPay" type="number" value="5000" /></label></div>
+          <div><label>Card<input id="cardPay" type="number" value="12000" /></label></div>
+          <div><label>UPI<input id="upiPay" type="number" value="8000" /></label></div>
+        </div>
+        <p class="ai-note" id="paymentInsight">AI: Patient pays ₹0 after insurance and advances; round-off applied.</p>
+      </div>
+      <div class="frosted-card">
+        <h3>Final summary</h3>
+        <div class="summary-grid">
+          <div><span>Gross</span><strong id="grossAmount">₹0</strong></div>
+          <div><span>GST</span><strong id="gstAmount">₹0</strong></div>
+          <div><span>Discount</span><strong id="discountAmount">₹0</strong></div>
+          <div><span>Insurance</span><strong id="insuranceAmount">₹0</strong></div>
+          <div><span>Patient pays</span><strong id="patientPay">₹0</strong></div>
+          <div><span>Outstanding</span><strong id="outstanding">₹0</strong></div>
+          <div><span>Round off</span><strong id="roundOff">₹0</strong></div>
+          <div><span>Net Payable</span><strong id="netPayable">₹0</strong></div>
+        </div>
+        <div class="inline-actions">
+          <button data-cta="Collect now">Collect now</button>
+          <button data-cta="Send to insurance">Send to insurance</button>
+          <button data-cta="Close discharge">Close discharge</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="copilot-fab" id="copilotFab">🤖</div>
+  <div class="copilot-panel" id="copilotPanel">
+    <div class="copilot-header">
+      <strong>HealthFlo Billing Copilot</strong>
+      <button id="closeCopilot" class="hf-icon-btn">✕</button>
+    </div>
+    <div class="copilot-body" id="copilotMessages">
+      <div class="bubble">Hi! I’ll track GST, non-payables, and payment splits as you bill.</div>
+    </div>
+    <div class="copilot-input">
+      <input id="copilotInput" placeholder="Ask: predict non-payables, generate discharge bill..." />
+      <button id="sendCopilot">Send</button>
+    </div>
+  </div>
+
+  <footer class="hf-footer">
+    <div class="footer-inner">
+      <div>
+        <h4>HealthFlo Billing OS</h4>
+        <p>One billing brain for hospital, pharmacy, lab, consultant, OT, and package workflows.</p>
+      </div>
+      <div class="footer-links">
+        <a href="#hospitalBilling">Hospital</a>
+        <a href="#pharmacyBilling">Pharmacy</a>
+        <a href="#labBilling">Lab</a>
+        <a href="#consultantBilling">Consultant</a>
+        <a href="#packageBilling">Packages</a>
+        <a href="#payments">Payments</a>
+      </div>
+      <div class="footer-meta">Denial-prevention • IRDAI clean claims • NABH compliant</div>
+    </div>
+  </footer>
+
+  <div class="hf-dock">
+    <a class="dock-item" href="#hospitalBilling">Hospital</a>
+    <a class="dock-item" href="#pharmacyBilling">Pharmacy</a>
+    <a class="dock-item" href="#labBilling">Lab</a>
+    <a class="dock-item" href="#consultantBilling">Consultant</a>
+    <a class="dock-item" href="#packageBilling">Package</a>
+    <a class="dock-item" href="#payments">Payments</a>
+  </div>
+</body>
+</html>
