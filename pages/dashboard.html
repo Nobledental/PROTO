@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HealthFlo — Patient OS Dashboard</title>
+  <link rel="stylesheet" href="../css/styles.css" />
+  <script defer src="../js/main.js"></script>
+</head>
+
+<body>
+
+<!-- ===================== HEADER ===================== -->
+<header class="hf-header">
+  <div class="hf-header-inner">
+
+    <!-- Avatar -->
+    <div class="hf-avatar neon-ring">
+      <span>D</span>
+    </div>
+
+    <!-- Greeting -->
+    <div class="hf-greet">
+      <h2>Hi, Dhivakaran 👋</h2>
+      <p class="muted">Your health overview dashboard</p>
+    </div>
+
+    <!-- Notification -->
+    <button class="hf-icon-btn">
+      <span class="icon-bell"></span>
+    </button>
+
+  </div>
+</header>
+
+<!-- ===================== SCROLL WRAP ===================== -->
+<main class="hf-scroll">
+
+  <!-- ===================== VITALS RIBBON ===================== -->
+  <section class="hf-vitals-ribbon">
+    <div class="vital-card" id="vt-hr">
+      <span class="vital-value">0</span>
+      <span class="vital-label">Heart Rate</span>
+    </div>
+
+    <div class="vital-card" id="vt-spo2">
+      <span class="vital-value">0</span>
+      <span class="vital-label">SpO₂</span>
+    </div>
+
+    <div class="vital-card" id="vt-bp">
+      <span class="vital-value">0/0</span>
+      <span class="vital-label">BP</span>
+    </div>
+
+    <div class="vital-card" id="vt-rr">
+      <span class="vital-value">0</span>
+      <span class="vital-label">Resp Rate</span>
+    </div>
+
+    <div class="vital-card" id="vt-sugar">
+      <span class="vital-value">0</span>
+      <span class="vital-label">Sugar</span>
+    </div>
+
+    <div class="vital-card" id="vt-temp">
+      <span class="vital-value">0</span>
+      <span class="vital-label">Temp</span>
+    </div>
+  </section>
+
+  <!-- ===================== AI COPILOT ===================== -->
+  <section class="hf-card ai-box">
+    <h3 class="card-title">AI Health Copilot</h3>
+    <div id="ai-feed" class="ai-feed"></div>
+  </section>
+
+  <!-- ===================== QUICK ACTION GRID ===================== -->
+  <section class="hf-grid">
+    <a href="appointments.html" class="hf-tile">
+      <span class="tile-icon ti-calendar"></span>
+      <span class="tile-label">Appointments</span>
+    </a>
+
+    <a href="hospitals.html" class="hf-tile">
+      <span class="tile-icon ti-hospital"></span>
+      <span class="tile-label">Hospitals</span>
+    </a>
+
+    <a href="doctors.html" class="hf-tile">
+      <span class="tile-icon ti-doctor"></span>
+      <span class="tile-label">Doctors</span>
+    </a>
+
+    <a href="labs.html" class="hf-tile">
+      <span class="tile-icon ti-lab"></span>
+      <span class="tile-label">Labs</span>
+    </a>
+
+    <a href="medicines.html" class="hf-tile">
+      <span class="tile-icon ti-pill"></span>
+      <span class="tile-label">Medicines</span>
+    </a>
+
+    <a href="insurance.html" class="hf-tile">
+      <span class="tile-icon ti-insurance"></span>
+      <span class="tile-label">Insurance</span>
+    </a>
+
+    <a href="finance.html" class="hf-tile">
+      <span class="tile-icon ti-finance"></span>
+      <span class="tile-label">Finance</span>
+    </a>
+
+    <a href="ambulance.html" class="hf-tile">
+      <span class="tile-icon ti-ambulance"></span>
+      <span class="tile-label">Ambulance</span>
+    </a>
+
+    <a href="vitals.html" class="hf-tile">
+      <span class="tile-icon ti-heart"></span>
+      <span class="tile-label">Vitals</span>
+    </a>
+
+    <a href="records.html" class="hf-tile">
+      <span class="tile-icon ti-folder"></span>
+      <span class="tile-label">Records</span>
+    </a>
+
+    <a href="profile.html" class="hf-tile">
+      <span class="tile-icon ti-user"></span>
+      <span class="tile-label">Profile</span>
+    </a>
+
+    <a href="settings.html" class="hf-tile">
+      <span class="tile-icon ti-settings"></span>
+      <span class="tile-label">Settings</span>
+    </a>
+  </section>
+
+  <!-- ===================== APPOINTMENTS PREVIEW ===================== -->
+  <section class="hf-card">
+    <h3 class="card-title">Upcoming Appointment</h3>
+    <div class="ap-row">
+      <div class="ap-info">
+        <strong>Dr. Meera — Cardiologist</strong>
+        <p class="muted">Fortis Hospital • Tomorrow 10:00 AM</p>
+      </div>
+      <button class="btn-mini">View</button>
+    </div>
+  </section>
+
+  <!-- ===================== INSURANCE SNAPSHOT ===================== -->
+  <section class="hf-card insurance-card">
+    <h3 class="card-title">Insurance Coverage</h3>
+    <p><strong>Policy:</strong> Reliance Health Infinity</p>
+    <p><strong>Coverage:</strong> ₹3,00,000</p>
+    <p><strong>Status:</strong> Active</p>
+    <a href="insurance.html" class="btn-link">Open Insurance OS →</a>
+  </section>
+
+  <!-- ===================== RECORDS SNAPSHOT ===================== -->
+  <section class="hf-card">
+    <h3 class="card-title">Medical Records</h3>
+    <ul class="rc-list">
+      <li>🧪 CBC Report — 2 days ago</li>
+      <li>📷 Chest X-Ray — 1 week ago</li>
+      <li>💊 Prescription — Yesterday</li>
+    </ul>
+    <a href="records.html" class="btn-link">View all records →</a>
+  </section>
+
+</main>
+
+</body>
+</html>
