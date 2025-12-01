@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="css/hospitals.css" />
 </head>
 
-<body class="density-compact">
+  <body class="density-compact app-frame">
   <a class="skip-link" href="#packages">Skip to hospital list</a>
 
   <!-- ===== Header ===== -->
@@ -47,8 +47,16 @@
   <!-- ===== Hero / Toolbar ===== -->
   <section class="svc-hero" id="how" aria-labelledby="heroTitle">
     <div class="container">
-      <h1 id="heroTitle">Find the right hospital & treatment package</h1>
-      <p class="sub">Compare costs, check services (OPD, IPD, labs, pharmacy, home visit), and book appointments instantly.</p>
+      <div class="hero-lede">
+        <div>
+          <h1 id="heroTitle">Find the right hospital & treatment package</h1>
+          <p class="sub">Compare costs, check services (OPD, IPD, labs, pharmacy, home visit), and book appointments instantly.</p>
+        </div>
+        <div class="hero-cta">
+          <button class="btn btn-primary" type="button" id="btnConcierge">Talk to a care guide</button>
+          <button class="btn btn-ghost" type="button" id="btnSaved">Saved hospitals</button>
+        </div>
+      </div>
 
       <div class="svc-toolbar" role="region" aria-label="Filters">
         <div class="input-wrap">
@@ -66,7 +74,7 @@
           <button class="chip" data-filter="Cashless">Cashless</button>
         </div>
 
-        <div class="chip-row" aria-label="Refine">
+        <div class="chip-row toolbar-row" aria-label="Refine">
           <select id="cityFilter" class="select" aria-label="City">
             <option value="">All Cities</option>
             <option>Mumbai</option><option>Delhi</option><option>Bengaluru</option>
@@ -87,6 +95,18 @@
             <option>Paediatrics</option>
             <option>General Surgery</option>
           </select>
+
+          <select id="sortSelect" class="select" aria-label="Sort hospitals">
+            <option value="rating">Rating: High to Low</option>
+            <option value="packages">Most Packages</option>
+            <option value="specialties">Most Specialities</option>
+            <option value="name">Name A–Z</option>
+          </select>
+
+          <div class="toolbar-actions">
+            <button id="clearFilters" class="btn btn-ghost btn-icon" type="button" aria-label="Clear filters">✕</button>
+            <button id="toggleView" class="btn btn-ghost" type="button">Grid View</button>
+          </div>
         </div>
       </div>
     </div>
@@ -96,6 +116,22 @@
   <main id="packages" class="solutions" aria-labelledby="listTitle">
     <div class="container">
       <h2 id="listTitle" class="vh">Hospitals & Clinics</h2>
+
+      <div class="result-bar" role="status" aria-live="polite">
+        <div class="result-meta">
+          <span id="resultCount">0 results</span>
+          <span class="result-pill" id="activeCity">All India</span>
+          <span class="result-pill" id="activeSpec">All specialities</span>
+        </div>
+        <div class="result-actions">
+          <label class="toggle">
+            <input type="checkbox" id="toggleSavedOnly" />
+            <span class="toggle-ui"></span>
+            <span class="toggle-label">Show saved only</span>
+          </label>
+          <button class="btn btn-ghost" type="button" id="btnShareFilters">Share filters</button>
+        </div>
+      </div>
 
       <!-- The grid is injected by JS with 25+ hospitals -->
       <div id="hospitalGrid" class="solution-grid" aria-live="polite"></div>
@@ -268,22 +304,35 @@
   <!-- ===== Templates (Card structures) ===== -->
   <template id="tpl-hospital-card">
     <article class="solution-card" data-id="">
+      <button class="fav-toggle" type="button" aria-pressed="false" aria-label="Save hospital">♡</button>
       <figure>
         <img src="" alt="" loading="lazy" />
+        <div class="card-chip card-chip--prime" aria-hidden="true">Prime partner</div>
       </figure>
-      <h3 class="hf-row">
-        <span class="card-title">Hospital Name</span>
-        <span class="hf-right hf-pill card-city">City</span>
-      </h3>
-      <p class="card-sub">Top specialities • OPD, IPD, 24×7 Pharmacy</p>
+      <div class="card-body">
+        <div class="card-heading">
+          <h3 class="hf-row">
+            <span class="card-title">Hospital Name</span>
+            <span class="hf-right hf-pill card-city">City</span>
+          </h3>
+          <div class="card-sub">Top specialities • OPD, IPD, 24×7 Pharmacy</div>
+        </div>
 
-      <div class="badges card-badges">
-        <!-- JS: service badges -->
-      </div>
+        <div class="card-meta">
+          <span class="badge rating-badge">⭐ 4.7</span>
+          <span class="card-area">Area</span>
+          <span class="badge muted-badge">6 specialties</span>
+          <span class="badge muted-badge">12 packages</span>
+        </div>
 
-      <div class="card-cta">
-        <button class="btn btn-primary btn-view" type="button">View Details</button>
-        <button class="btn btn-ghost btn-enquire" type="button">Enquire Package</button>
+        <div class="badges card-badges">
+          <!-- JS: service badges -->
+        </div>
+
+        <div class="card-cta">
+          <button class="btn btn-primary btn-view" type="button">View Details</button>
+          <button class="btn btn-ghost btn-enquire" type="button">Enquire Package</button>
+        </div>
       </div>
     </article>
   </template>
