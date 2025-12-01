@@ -1,1 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HealthFlo — Medical Records</title>
 
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="main.js"></script>
+</head>
+
+<body>
+
+<header class="hf-header">
+  <a href="dashboard.html" class="hf-logo">
+    <span class="logo-dot"></span> HealthFlo
+  </a>
+  <button id="themeToggle" class="hf-icon-btn">🌗</button>
+</header>
+
+<section class="hf-section">
+  <h2 class="hf-title">Medical Records</h2>
+
+  <div class="hf-toolbar">
+    <input type="search" id="recordSearch" class="hf-search"
+           placeholder="Search lab reports, prescriptions, scans…">
+
+    <div class="hf-chip-row">
+      <button class="hf-chip active" data-filter="all">All</button>
+      <button class="hf-chip" data-filter="lab">Lab</button>
+      <button class="hf-chip" data-filter="scan">Radiology</button>
+      <button class="hf-chip" data-filter="rx">Prescriptions</button>
+      <button class="hf-chip" data-filter="note">Doctor Notes</button>
+      <button class="hf-chip" data-filter="discharge">Discharge</button>
+    </div>
+  </div>
+
+  <div id="recordList" class="hf-records">
+    <!-- Auto-generated from JS -->
+  </div>
+
+</section>
+
+<footer class="hf-footer">
+  <a href="dashboard.html">🏠</a>
+  <a href="vitals.html">❤️</a>
+  <a href="records.html" class="active">📁</a>
+  <a href="profile.html">👤</a>
+</footer>
+
+</body>
+</html>
