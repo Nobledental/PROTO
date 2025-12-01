@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="white">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HealthFlo Patient OS — Command Center</title>
+  <link rel="stylesheet" href="assets/styles.css">
+  <script defer src="assets/main.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="index.html"><span class="logo-dot"></span>HealthFlo Patient OS</a>
+      <nav class="primary-nav" aria-label="Primary">
+        <ul>
+          <li><a href="#onboarding">Onboarding</a></li>
+          <li><a href="#dashboard">Dashboard</a></li>
+          <li><a href="#care">Care</a></li>
+          <li><a href="#insurance">Insurance</a></li>
+          <li><a href="#vitals">Vitals</a></li>
+          <li><a href="#records">Records</a></li>
+          <li><a href="#copilot">Copilot</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <div class="theme-switch" role="group" aria-label="Switch design theme">
+          <button id="themeToggle" type="button">☀️</button>
+        </div>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <section class="ticker" id="hfTicker">
+    <div class="container ticker__inner">
+      <div class="ticker__label">
+        <svg viewBox="0 0 20 14" aria-hidden="true"><path fill="currentColor" d="M19.2 2.2 10.9 13.3c-.4.6-1.4.6-1.8 0L.8 2.2C.2 1.4.8.2 1.8.2h16.4c1 0 1.6 1.2 1 2z"/></svg>
+        Live Network</div>
+      <div class="ticker__viewport"><div class="ticker__track" role="list">
+        <span class="ticker__item" role="listitem">Cashless-ready hospitals: 1,180</span>
+        <span class="ticker__item" role="listitem">Labs synced: 920</span>
+        <span class="ticker__item" role="listitem">Ambulances live: 320</span>
+        <span class="ticker__item" role="listitem">AI guardian flags cleared: 98.6%</span>
+        <span class="ticker__item" role="listitem">EMI partners: 12 banks/NBFCs</span>
+        <span class="ticker__item" role="listitem">IoMT devices streaming: 8,420</span>
+      </div></div>
+      <button class="ticker__pause" aria-label="Pause ticker" id="pauseTicker">⏸</button>
+    </div>
+  </section>
+
+  <section class="hero" id="hero">
+    <canvas id="heroCanvas" aria-hidden="true"></canvas>
+    <div class="hero-overlay" aria-hidden="true"></div>
+    <div class="container hero-inner">
+      <div class="hero-copy">
+        <p class="hero-support">India’s multi-layer healthcare OS</p>
+        <h1>HealthFlo Patient Command Center</h1>
+        <p class="hero-body">Authentication-ready onboarding, real-time dashboards, appointments, insurance, finance, vitals, ambulance, AI copilot, and notifications — all tuned for Indian hospital + TPA workflows.</p>
+        <div class="persona-selector" id="personaSelect">
+          <button class="persona-option is-active" data-persona="patient"><span class="persona-icon">🧑‍⚕️</span>Patient <small>Care, bills, alerts</small></button>
+          <button class="persona-option" data-persona="family"><span class="persona-icon">👪</span>Family <small>Vitals + approvals</small></button>
+          <button class="persona-option" data-persona="admin"><span class="persona-icon">🏥</span>Hospital desk <small>Cashless + discharge</small></button>
+          <button class="persona-option" data-persona="insurer"><span class="persona-icon">🛡️</span>Insurance <small>Risk + status</small></button>
+        </div>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="#dashboard">Open Patient Home</a>
+          <a class="btn btn-ghost" href="appointments.html">Book Appointment</a>
+          <a class="btn btn-ghost" href="insurance.html">Insurance OS</a>
+        </div>
+        <div class="app-badges">
+          <div class="badge-card"><span class="badge-icon">📲</span><span class="badge-text">Mobile OTP</span></div>
+          <div class="badge-card"><span class="badge-icon">🔐</span><span class="badge-text">Encrypted vault</span></div>
+          <div class="badge-card"><span class="badge-icon">⚡</span><span class="badge-text">Live vitals sync</span></div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-badge">AI Guardian: Stable</div>
+        <img src="assets/icons/home.svg" alt="Patient OS preview" />
+      </div>
+    </div>
+  </section>
+
+  <main id="main">
+    <section class="container hf-section" id="onboarding">
+      <h2 class="hf-title">Onboarding & Account</h2>
+      <p class="muted">Mobile OTP login, Aadhaar-ready KYC, multi-device sync, and secure encrypted storage with family/emergency continuity.</p>
+      <div class="hf-grid" id="onboardingGrid"></div>
+      <div class="hf-card" id="profileSummary"></div>
+    </section>
+
+    <section class="container hf-section" id="dashboard">
+      <h2 class="hf-title">Patient Home Dashboard</h2>
+      <p class="muted">Today’s appointments, medicines, reports, insurance, live vitals, AI insights, finance reminders, emergency alerts, and ongoing treatment status.</p>
+      <div class="hf-grid" id="todayGrid"></div>
+      <div class="hf-grid" id="quickActions"></div>
+    </section>
+
+    <section class="container hf-section" id="care">
+      <div class="hf-card">
+        <h3 class="card-title">Appointments & Care Access</h3>
+        <div class="tab-bar" id="careTabs" role="tablist" aria-label="Care modules">
+          <button class="hf-chip active" data-tab="appointments" role="tab">Appointments</button>
+          <button class="hf-chip" data-tab="hospitals" role="tab">Hospitals & Clinics</button>
+          <button class="hf-chip" data-tab="doctors" role="tab">Doctors</button>
+          <button class="hf-chip" data-tab="labs" role="tab">Labs & Diagnostics</button>
+          <button class="hf-chip" data-tab="medicines" role="tab">Medicines</button>
+        </div>
+        <div id="carePanel"></div>
+      </div>
+    </section>
+
+    <section class="container hf-section" id="insurance">
+      <h2 class="hf-title">Insurance OS & Finance OS</h2>
+      <p class="muted">Cashless eligibility, reimbursement tracking, non-payables, EMI eligibility, and split payments.</p>
+      <div class="hf-grid" id="insuranceGrid"></div>
+      <div class="hf-card" id="financeCard"></div>
+    </section>
+
+    <section class="container hf-section" id="ambulance">
+      <div class="hf-card">
+        <h3 class="card-title">Ambulance & Emergency Automation</h3>
+        <div class="hf-grid" id="ambulanceGrid"></div>
+      </div>
+    </section>
+
+    <section class="container hf-section" id="vitals">
+      <h2 class="hf-title">Vitals & IoMT</h2>
+      <p class="muted">Live sync for heart rate, SpO2, respiration, BP, temperature, glucose, steps, sleep, ECG (future) with AI anomaly detection and emergency triggers.</p>
+      <div class="hf-grid" id="vitalsGrid"></div>
+      <div class="hf-card" id="vitalsInsights"></div>
+    </section>
+
+    <section class="container hf-section" id="records">
+      <h2 class="hf-title">Health Records Vault</h2>
+      <p class="muted">OPD, IPD, prescriptions, lab, radiology, discharge, operative notes, insurance docs, bills & receipts with secure sharing and AI summarization.</p>
+      <div class="hf-grid" id="recordsGrid"></div>
+    </section>
+
+    <section class="container hf-section" id="family">
+      <div class="hf-grid" id="familyGrid"></div>
+    </section>
+
+    <section class="container hf-section" id="copilot">
+      <h2 class="hf-title">AI Copilot & Notifications</h2>
+      <p class="muted">Symptom triage, lab interpretation, diet, medication, insurance queries, mental health nudges, treatment summaries, and omnichannel notifications.</p>
+      <div class="hf-grid" id="copilotGrid"></div>
+      <div class="hf-card" id="notificationsPanel"></div>
+    </section>
+
+    <section class="container hf-section" id="settings">
+      <h2 class="hf-title">Settings</h2>
+      <p class="muted">Language, theme (light/dark/matte/cosmic), notification preferences, privacy, device connections, data sharing controls, account deletion.</p>
+      <div class="hf-grid" id="settingsGrid"></div>
+    </section>
+  </main>
+
+  <footer class="hf-footer">
+    <canvas id="hfLiquidCanvas" aria-hidden="true"></canvas>
+    <div class="hf-top-line" aria-hidden="true"></div>
+    <div class="hf-nri">
+      <h3>HEALTHFLO — INDIA + NRI CARE</h3>
+      <p>Premium healthcare OS with AI guardian, insurance clarity, and emergency automations.</p>
+      <div class="hf-nri-social">
+        <a href="#" aria-label="LinkedIn">in</a>
+        <a href="#" aria-label="Twitter">𝕏</a>
+        <a href="#" aria-label="YouTube">▶</a>
+      </div>
+    </div>
+    <div class="hf-grid">
+      <div class="hf-col"><h4>Patient OS</h4><a href="#dashboard">Dashboard</a><a href="#care">Appointments</a><a href="#vitals">Vitals</a><a href="#records">Records</a></div>
+      <div class="hf-col"><h4>Hospital OS</h4><a href="hospital-os.html">HMS</a><a href="billing-os.html">Billing</a><a href="ecosystem.html">Network</a></div>
+      <div class="hf-col"><h4>Insurance</h4><a href="insurance.html">Insurance OS</a><a href="#insurance">Reimbursement</a><a href="#finance">Finance</a></div>
+      <div class="hf-col"><h4>Help</h4><a href="#copilot">AI Copilot</a><a href="#settings">Settings</a><button class="hf-help">Contact Support</button></div>
+    </div>
+    <div class="hf-tiles">
+      <div class="hf-tile">99.4% uptime</div>
+      <div class="hf-tile">IRDAI-ready docs</div>
+      <div class="hf-tile">IoMT secure</div>
+    </div>
+    <div class="hf-copy">© 2024 HealthFlo — Patient OS</div>
+    <button class="hf-top" id="backToTop" aria-label="Back to top">↑</button>
+    <button class="hf-copilot" id="copilotFab" aria-label="Open copilot">🤖</button>
+    <div class="hf-copilot-popup" id="copilotPanel">
+      <div class="hf-chat-box" id="copilotChat"></div>
+      <input class="hf-chat-input" id="copilotInput" type="text" placeholder="Ask the copilot…" />
+      <button class="hf-help" id="copilotSend">Send</button>
+    </div>
+  </footer>
+</body>
+</html>
