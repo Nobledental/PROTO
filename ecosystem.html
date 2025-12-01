@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HealthFlo — Ecosystem OS</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script defer src="js/ecosystem.js"></script>
+</head>
+<body>
+  <header class="hf-header">
+    <div class="hf-header-inner">
+      <div class="hf-logo"><span class="logo-dot"></span>HealthFlo Ecosystem</div>
+      <div class="hf-nav-actions">
+        <div class="hf-personas" id="personaSelect">
+          <button class="hf-chip active" data-persona="patient">Patient</button>
+          <button class="hf-chip" data-persona="hospital">Hospital</button>
+          <button class="hf-chip" data-persona="insurer">Insurer</button>
+          <button class="hf-chip" data-persona="rcm">RCM</button>
+        </div>
+        <button id="navToggle" class="hf-icon-btn">☰</button>
+        <button id="themeToggle" class="hf-icon-btn">🌗</button>
+      </div>
+    </div>
+    <div class="hf-ticker" id="hfTicker">
+      <div class="ticker-track">
+        <span>Cashless pre-auth approvals moving: 12 in review • 4 cleared</span>
+        <span>Live ambulances en route: 3 • Average ETA 9 mins</span>
+        <span>Vitals watch — SpO₂ stable for all monitored patients</span>
+        <span>Insurance desk: Zero denials today • Audit-ready docs synced</span>
+        <span>Finance OS: New EMI offers activated for cardiac packages</span>
+      </div>
+    </div>
+  </header>
+
+  <section class="hf-hero">
+    <div class="hero-content">
+      <p class="badge">AI-powered • IRDAI-compliant • NABH-ready</p>
+      <h1>HealthFlo — One operating system for patients, hospitals, insurers, and RCM teams.</h1>
+      <p class="muted">Seamless appointments, cashless insurance clarity, EMI-backed procedures, ambulance orchestration, AI vitals guidance, and a medical record vault trusted by India’s leading providers.</p>
+      <div class="hero-cta">
+        <a class="btn-primary" href="#patient">Open Patient OS</a>
+        <a class="btn-ghost" href="#hospital">Explore Hospital OS</a>
+      </div>
+      <div class="hero-metrics">
+        <div class="metric">
+          <strong>5.2M</strong>
+          <span>Active patients</span>
+        </div>
+        <div class="metric">
+          <strong>1,240</strong>
+          <span>Hospitals live</span>
+        </div>
+        <div class="metric">
+          <strong>98.4%</strong>
+          <span>Cashless success</span>
+        </div>
+        <div class="metric">
+          <strong>11m</strong>
+          <span>Avg. ambulance ETA</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-pane">
+      <div class="frosted-card">
+        <h3>Live Vitals Stream</h3>
+        <div class="vitals-stack" id="vitalsStream">
+          <div class="vital-row"><span>❤️ Heart</span><strong>78 bpm</strong><small>Calm & consistent</small></div>
+          <div class="vital-row"><span>🩸 BP</span><strong>118/76</strong><small>Adaptive baseline</small></div>
+          <div class="vital-row"><span>🌬️ Resp</span><strong>15 rpm</strong><small>Steady</small></div>
+          <div class="vital-row"><span>🩺 SpO₂</span><strong>98%</strong><small>On target</small></div>
+        </div>
+        <p class="ai-note" id="vitalInsight">AI is learning your resting rhythm for better alerts.</p>
+        <button class="btn-mini" id="expandVitals">View graphs</button>
+      </div>
+      <div class="frosted-card">
+        <h3>Insurance & Billing Clarity</h3>
+        <ul class="bullet-list">
+          <li>Instant cashless eligibility with TPA package mapping.</li>
+          <li>Room rent, co-pay, non-payables auto-deducted in preview.</li>
+          <li>Audit-ready documents synced to insurer & patient vault.</li>
+        </ul>
+        <button class="btn-primary" id="openInsurance">Open Insurance OS</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="hf-section" id="patient">
+    <div class="section-head">
+      <div>
+        <p class="badge">Patient OS</p>
+        <h2>Family-first care with AI guardrails.</h2>
+        <p class="muted">Book doctors, manage medicines, monitor vitals, and get insurer-ready records in one place. Designed for Indian families with parents, kids, and elders onboarded together.</p>
+      </div>
+      <div class="section-actions">
+        <button class="btn-ghost" data-cta="family">Add family</button>
+        <button class="btn-primary" data-cta="appointment">Book appointment</button>
+      </div>
+    </div>
+    <div class="hf-grid">
+      <div class="hf-card tile">
+        <h3>Appointments & Doctors</h3>
+        <p>Find NABH hospitals, see doctor slots, and get AI prep notes before every visit.</p>
+        <div class="mini-row"><span>Next visit</span><strong>Dr. Meera • Cardiology • Tue 10:30 AM</strong></div>
+        <a href="appointments.html" class="btn-link">Open</a>
+      </div>
+      <div class="hf-card tile">
+        <h3>Vitals & Wearables</h3>
+        <p>Continuous vitals from BP cuffs, pulse oximeters, and CGM—streamed with safe AI commentary.</p>
+        <div class="mini-row"><span>Trend</span><strong>Stable • No escalation triggers</strong></div>
+        <a href="vitals.html" class="btn-link">Monitor</a>
+      </div>
+      <div class="hf-card tile">
+        <h3>Medicines & Pharmacy</h3>
+        <p>Prescription timeline with refill nudges, generic suggestions, and nearby e-pharmacy partners.</p>
+        <div class="mini-row"><span>Today</span><strong>Atorvastatin 10mg • 1 tab • 9:00 PM</strong></div>
+        <a href="medicines.html" class="btn-link">Manage</a>
+      </div>
+      <div class="hf-card tile">
+        <h3>Records & Vault</h3>
+        <p>OPD/IPD files, radiology, labs, discharge summaries—indexed, tagged, and insurer-sharable.</p>
+        <div class="mini-row"><span>New</span><strong>Chest X-Ray • Report ready</strong></div>
+        <a href="records.html" class="btn-link">View</a>
+      </div>
+    </div>
+    <div class="hf-grid">
+      <div class="hf-card">
+        <h3>Insurance OS</h3>
+        <p>Cashless or reimbursement? Get coverage clarity with co-pay, deductible, and non-payable highlights.</p>
+        <a href="insurance.html" class="btn-link">Open Insurance OS →</a>
+      </div>
+      <div class="hf-card">
+        <h3>Finance OS</h3>
+        <p>CIBIL-friendly medical loans, EMI simulations, and procedure-linked offers under 3 minutes.</p>
+        <a href="finance.html" class="btn-link">Run EMI simulation →</a>
+      </div>
+      <div class="hf-card">
+        <h3>Ambulance & Emergency</h3>
+        <p>One-tap SOS with live GPS, hospital routing, and pre-arrival triage sheets.</p>
+        <a href="ambulance.html" class="btn-link">Track ambulance →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="hf-section" id="hospital">
+    <div class="section-head">
+      <div>
+        <p class="badge">Hospital OS</p>
+        <h2>OPD to OT to discharge without silos.</h2>
+        <p class="muted">Front desk to billing to insurance desk—one interface for care teams. RCM-friendly, IRDAI aligned.</p>
+      </div>
+      <div class="section-actions">
+        <button class="btn-primary" data-cta="demo">Request demo</button>
+      </div>
+    </div>
+    <div class="hf-grid">
+      <div class="hf-card tile">
+        <h3>HMS Console</h3>
+        <p>OPD/IPD boards, ward census, surgery lists, pharmacy stock, and lab routing in one dashboard.</p>
+        <div class="mini-row"><span>Today</span><strong>42 OPD • 18 IPD • 6 OT cases</strong></div>
+        <a href="hospitals.html" class="btn-link">Open HMS →</a>
+      </div>
+      <div class="hf-card tile">
+        <h3>Insurance Desk Automation</h3>
+        <p>Pre-auth templates, package mapping, and denial prevention with coding verification.</p>
+        <div class="mini-row"><span>Pre-auth</span><strong>Avg turnaround 42 mins</strong></div>
+        <a href="insurance.html" class="btn-link">Run cashless flow →</a>
+      </div>
+      <div class="hf-card tile">
+        <h3>RCM & TPA Hub</h3>
+        <p>Enhancements, final bill, audit docs, and TPA responses consolidated with reminders.</p>
+        <div class="mini-row"><span>Pending</span><strong>8 enhancements • 0 denials</strong></div>
+        <a href="finance.html" class="btn-link">Open RCM →</a>
+      </div>
+      <div class="hf-card tile">
+        <h3>Clinician Copilot</h3>
+        <p>Rounds summary, vitals drift alerts, and discharge-ready notes—safe and non-diagnostic.</p>
+        <div class="mini-row"><span>Alerts</span><strong>2 vitals trending up • Not critical</strong></div>
+        <a href="copilot.html" class="btn-link">Launch copilot →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="hf-section" id="insurance">
+    <div class="section-head">
+      <div>
+        <p class="badge">Insurance OS</p>
+        <h2>Cashless clarity and audit-ready reimbursement.</h2>
+        <p class="muted">TPA-ready document kits, room rent validation, procedure coding checks, and settlement tracking with patient-facing transparency.</p>
+      </div>
+      <div class="section-actions">
+        <button class="btn-ghost" data-cta="upload">Upload policy</button>
+        <button class="btn-primary" data-cta="coverage">Check coverage</button>
+      </div>
+    </div>
+    <div class="hf-grid">
+      <div class="hf-card">
+        <h3>Pre-auth Designer</h3>
+        <p>Auto-fill insurer formats, attach investigations, and submit with a single click from HMS.</p>
+        <div class="mini-row"><span>Status</span><strong>12 drafts saved</strong></div>
+      </div>
+      <div class="hf-card">
+        <h3>Deduction Guard</h3>
+        <p>Flags non-payables, sub-limits, and missing ICD/PCS codes before claim submission.</p>
+        <div class="mini-row"><span>Impact</span><strong>Denials reduced 32%</strong></div>
+      </div>
+      <div class="hf-card">
+        <h3>Reimbursement Tracker</h3>
+        <p>Patient-facing status with insurer SLAs, courier tracking, and digital receipts.</p>
+        <div class="mini-row"><span>Turnaround</span><strong>Avg. 9.5 days</strong></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="hf-section" id="admin">
+    <div class="section-head">
+      <div>
+        <p class="badge">Master Admin Console</p>
+        <h2>Control plane for HealthFlo.</h2>
+        <p class="muted">Approve providers, monitor claims, orchestrate emergencies, and manage support—secure, logged, and auditable.</p>
+      </div>
+      <div class="section-actions">
+        <button class="btn-primary" data-cta="admin">Open console</button>
+      </div>
+    </div>
+    <div class="hf-grid">
+      <div class="hf-card">
+        <h3>Provider Approvals</h3>
+        <p>NABH/NABL validation, onboarding packets, and go-live checklists.</p>
+        <div class="mini-row"><span>Queue</span><strong>4 hospitals • 6 labs</strong></div>
+      </div>
+      <div class="hf-card">
+        <h3>Payments & Settlements</h3>
+        <p>Online payments, refunds, and settlement reconciliation with insurers and partners.</p>
+        <div class="mini-row"><span>Today</span><strong>₹82L processed</strong></div>
+      </div>
+      <div class="hf-card">
+        <h3>Emergency Dispatch</h3>
+        <p>Multi-city ambulance partners, GPS telemetry, and hospital triage alerts.</p>
+        <div class="mini-row"><span>Live</span><strong>3 dispatches active</strong></div>
+      </div>
+      <div class="hf-card">
+        <h3>Support Ops</h3>
+        <p>Ticket queues, SLA timers, and AI summaries for every interaction.</p>
+        <div class="mini-row"><span>SLA</span><strong>98% within 15 mins</strong></div>
+      </div>
+    </div>
+  </section>
+
+  <nav class="hf-dock">
+    <a href="#patient" class="dock-item active">Patient</a>
+    <a href="#hospital" class="dock-item">Hospital</a>
+    <a href="#insurance" class="dock-item">Insurance</a>
+    <a href="#admin" class="dock-item">Admin</a>
+    <button class="dock-item" id="openCopilot">Copilot</button>
+  </nav>
+
+  <footer class="hf-footer">
+    <div class="footer-grid">
+      <div>
+        <div class="hf-logo"><span class="logo-dot"></span>HealthFlo</div>
+        <p class="muted">India’s multi-layer healthcare OS with AI guardrails, insurer clarity, and patient-first design.</p>
+      </div>
+      <div>
+        <h4>Modules</h4>
+        <ul>
+          <li>Patient OS Super App</li>
+          <li>Hospital OS (HMS)</li>
+          <li>Insurance OS</li>
+          <li>RCM Recovery</li>
+          <li>Master Admin Console</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Compliance</h4>
+        <ul>
+          <li>IRDAI-aligned insurance flows</li>
+          <li>NABH/NABL provider onboarding</li>
+          <li>Data vault & consent</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Support</h4>
+        <ul>
+          <li>24x7 care coordination</li>
+          <li>Insurance desk help</li>
+          <li>Emergency hotline</li>
+        </ul>
+      </div>
+    </div>
+    <p class="muted">© 2024 HealthFlo. Built for Indian healthcare.</p>
+  </footer>
+
+  <button id="copilotFab" class="hf-fab">🤖</button>
+  <div id="copilotPanel" class="copilot-panel hidden">
+    <div class="copilot-header">
+      <strong>HealthFlo Copilot</strong>
+      <button class="hf-icon-btn" id="closeCopilot">✕</button>
+    </div>
+    <div class="copilot-body" id="copilotChat">
+      <div class="ai-bubble">Hi! I can clarify your insurance, prep your doctor visit, or watch your vitals trends.</div>
+    </div>
+    <div class="copilot-input">
+      <input type="text" id="copilotInput" placeholder="Ask about cashless, vitals, or EMI options" />
+      <button id="copilotSend" class="btn-mini">Send</button>
+    </div>
+  </div>
+</body>
+</html>
