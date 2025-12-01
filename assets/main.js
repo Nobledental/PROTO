@@ -9,14 +9,17 @@ const $$ = (selector, el = document) => [...el.querySelectorAll(selector)];
 /* ============================================================
    THEME HANDLING
    ============================================================ */
-const THEMES = ['light', 'dark'];
+const THEMES = ['light', 'matte', 'dark'];
+const THEME_ICONS = { light: '☀️', matte: '🪟', dark: '🌙' };
 function applyTheme(theme) {
   const chosen = THEMES.includes(theme) ? theme : 'light';
   document.documentElement.dataset.theme = chosen;
   localStorage.setItem('hfTheme', chosen);
   $$('#themeToggle, #themeToggle2').forEach(btn => {
-    btn.textContent = chosen === 'dark' ? '☀️' : '🌙';
-    btn.setAttribute('aria-label', `Switch to ${chosen === 'dark' ? 'light' : 'dark'} mode`);
+    const icon = THEME_ICONS[chosen] || '☀️';
+    const next = THEMES[(THEMES.indexOf(chosen) + 1) % THEMES.length];
+    btn.textContent = icon;
+    btn.setAttribute('aria-label', `Switch to ${next} mode`);
   });
 }
 
@@ -25,7 +28,7 @@ function initTheme() {
   $$('#themeToggle, #themeToggle2').forEach(btn => {
     btn.addEventListener('click', () => {
       const current = document.documentElement.dataset.theme || 'light';
-      const next = current === 'dark' ? 'light' : 'dark';
+      const next = THEMES[(THEMES.indexOf(current) + 1) % THEMES.length];
       applyTheme(next);
     });
   });
@@ -197,6 +200,140 @@ const personas = {
   insurer: 'Insurer: non-payable prediction, audit-ready packets, and IRDAI-compliant docs.'
 };
 
+const osStack = [
+  {
+    name: 'Patient OS',
+    status: 'Matte ready',
+    uptime: '99.4%',
+    signal: '+0.4% week',
+    badge: 'Live',
+    tone: 'brand',
+    detail: 'Patient journeys, alerts, and vaults are synced across devices.'
+  },
+  {
+    name: 'Hospital OS',
+    status: 'Command live',
+    uptime: '99.2%',
+    signal: '12 flows',
+    badge: 'HMS',
+    tone: 'mint',
+    detail: 'Triage, rounds, OT, and discharge pipelines are clean and audited.'
+  },
+  {
+    name: 'Billing OS',
+    status: 'Denial-proof',
+    uptime: '98.9%',
+    signal: 'Zero stack drift',
+    badge: 'Billing',
+    tone: 'amber',
+    detail: 'Tariffs, pre-auth, and package guardrails are locked for billing.'
+  },
+  {
+    name: 'Insurance OS',
+    status: 'Cashless clean',
+    uptime: '98.7%',
+    signal: 'IRDAI ready',
+    badge: 'Insurance',
+    tone: 'violet',
+    detail: 'Eligibility, non-payables, and reimbursements are sequenced correctly.'
+  }
+];
+
+const onboarding = [
+  { title: 'KYC & Aadhaar-ready login', meta: 'Mobile OTP + passkey', status: 'Verified', icon: '🔐' },
+  { title: 'Family & caregiver access', meta: 'Granular permissions', status: '2 linked', icon: '👪' },
+  { title: 'Device + IoMT sync', meta: 'Watch, glucometer, ECG', status: 'Live stream', icon: '📡' },
+  { title: 'Emergency continuity', meta: 'NRI + SOS workflows', status: 'Always-on', icon: '🚑' }
+];
+
+const todayPanels = [
+  { title: 'Today’s schedule', body: '2 appointments confirmed; slots are OTP locked for reschedule.', chip: 'Care', highlight: '10:00 AM — Cardiology' },
+  { title: 'Medicines & refills', body: 'Next refill due in 5 days. Auto-refill toggle is on for heart meds.', chip: 'Meds', highlight: 'Adherence: 98%' },
+  { title: 'Insurance & billing', body: 'Cashless approved with 10% co-pay. No non-payables flagged.', chip: 'Finance', highlight: '₹18,200 pre-auth' }
+];
+
+const quickActions = [
+  { title: 'Share live vitals', note: 'Send to doctor or family', icon: '📊' },
+  { title: 'Download records', note: 'AI-summarized PDF packet', icon: '📥' },
+  { title: 'Start SOS flow', note: 'Dispatch ambulance + notify', icon: '🚨' },
+  { title: 'Ask AI copilot', note: 'Diet, meds, insurance help', icon: '🤖' }
+];
+
+const careTabContent = {
+  appointments: appointments.map(a => ({
+    title: a.doctor,
+    subtitle: `${a.specialty} • ${a.mode}`,
+    footer: `${a.time} — ${a.location}`,
+    badge: a.status,
+    tone: 'brand'
+  })),
+  hospitals: hospitalCatalog.map(h => ({
+    title: h.name,
+    subtitle: `${h.address}`,
+    footer: `Beds ${h.beds} • Rating ${h.rating}`,
+    badge: h.tags.slice(0, 2).join(' · '),
+    tone: 'mint'
+  })),
+  doctors: doctorCatalog.map(d => ({
+    title: d.name,
+    subtitle: `${d.specialty} • ${d.experience} yrs`,
+    footer: `${d.hospital} — Fees ₹${d.fees}`,
+    badge: d.isOnline ? 'Online' : 'In-person',
+    tone: d.isOnline ? 'brand' : 'amber'
+  })),
+  labs: labsCatalog.map(l => ({
+    title: l.name,
+    subtitle: `${l.location} • ${l.rating}⭐`,
+    footer: `${l.tat} • ${l.price}`,
+    badge: l.tags.join(', '),
+    tone: 'violet'
+  })),
+  medicines: medicineCatalog.map(m => ({
+    title: m.name,
+    subtitle: `${m.salt} — ${m.use}`,
+    footer: m.price,
+    badge: m.stock,
+    tone: 'mint'
+  }))
+};
+
+const insurancePanels = [
+  { title: 'Cashless eligibility', body: 'Policy active with co-pay of 10%. Network hospital coverage intact.', meta: 'IRDAI aligned', tone: 'brand' },
+  { title: 'Non-payables guardrail', body: 'Consumables, room rent, and investigations mapped to policy clauses.', meta: '0 denials predicted', tone: 'amber' },
+  { title: 'Reimbursement track', body: 'Pending bills batched with prescriptions and lab proofs for upload.', meta: 'TAT: 3 days', tone: 'violet' }
+];
+
+const financeCard = {
+  title: 'Finance OS signals',
+  rows: [
+    { label: 'Split payments', value: 'UPI + EMI + card' },
+    { label: 'Estimates', value: 'CABG package locked' },
+    { label: 'Outstanding', value: '₹8,200 (due next week)' }
+  ]
+};
+
+const vitalsInsights = [
+  { label: 'Heart rate', value: '78 bpm', delta: '+2 vs yesterday', tone: 'brand' },
+  { label: 'SpO₂', value: '98%', delta: 'Stable', tone: 'mint' },
+  { label: 'BP', value: '122/78', delta: 'On target', tone: 'violet' },
+  { label: 'Glucose', value: '102 mg/dL', delta: 'Post-meal', tone: 'amber' }
+];
+
+const recordVault = records.map(rec => ({
+  title: rec.title,
+  subtitle: rec.type,
+  footer: rec.date,
+  badge: rec.status,
+  tone: 'brand'
+}));
+
+const notifications = [
+  'Vitals stable — hydration reminder sent.',
+  'Insurance: Non-payables cleared for today’s OPD.',
+  'Lab: CBC and thyroid panel ready to view.',
+  'Finance: EMI partner pre-approved.'
+];
+
 /* ============================================================
    RENDER HELPERS
    ============================================================ */
@@ -204,6 +341,293 @@ function render(containerId, items, templateFn) {
   const host = document.getElementById(containerId);
   if (!host) return;
   host.innerHTML = items.map(templateFn).join('');
+}
+
+function toneClass(tone) {
+  return tone ? `tone-${tone}` : '';
+}
+
+function renderOsStack() {
+  const strip = $('#osStrip');
+  const grid = $('#osHealth');
+  if (strip) {
+    strip.innerHTML = osStack
+      .map(item => `
+        <div class="os-chip ${toneClass(item.tone)}">
+          <span class="status-dot"></span>
+          <span>${item.name}</span>
+          <strong>${item.uptime}</strong>
+          <small>${item.status}</small>
+        </div>
+      `)
+      .join('');
+  }
+
+  if (grid) {
+    grid.innerHTML = osStack
+      .map(item => `
+        <article class="hf-card os-card ${toneClass(item.tone)}">
+          <div class="os-card__row">
+            <span class="pill pill--soft">${item.badge}</span>
+            <span class="pill pill--ghost">${item.uptime}</span>
+          </div>
+          <h3>${item.name}</h3>
+          <p class="muted">${item.detail}</p>
+          <div class="os-card__row">
+            <div class="status-inline"><span class="status-dot"></span>${item.status}</div>
+            <span class="pill pill--ghost">${item.signal}</span>
+          </div>
+        </article>
+      `)
+      .join('');
+  }
+}
+
+function renderOnboardingDeck() {
+  const grid = $('#onboardingGrid');
+  const profile = $('#profileSummary');
+  if (grid) {
+    grid.innerHTML = onboarding
+      .map(card => `
+        <article class="hf-card onboarding-card">
+          <div class="onboarding-icon">${card.icon}</div>
+          <div>
+            <div class="list-title">${card.title}</div>
+            <div class="muted">${card.meta}</div>
+          </div>
+          <span class="pill pill--ghost">${card.status}</span>
+        </article>
+      `)
+      .join('');
+  }
+
+  if (profile) {
+    const liveOs = osStack.map(item => `<li><span class="status-dot"></span>${item.name} — ${item.status}</li>`).join('');
+    profile.innerHTML = `
+      <div class="profile-head">
+        <div class="profile-avatar">🩺</div>
+        <h3>HealthFlo profile</h3>
+        <p class="profile-sub">Synced across Patient, Hospital, Billing, and Insurance OS.</p>
+      </div>
+      <ul class="profile-status">${liveOs}</ul>
+      <div class="mini-row"><span>Continuity</span><strong>Always-on</strong></div>
+      <div class="mini-row"><span>Device sync</span><strong>Watch + glucometer</strong></div>
+    `;
+  }
+}
+
+function renderDashboardPanels() {
+  const todayGrid = $('#todayGrid');
+  const quickGrid = $('#quickActions');
+  if (todayGrid) {
+    todayGrid.innerHTML = todayPanels
+      .map(panel => `
+        <article class="hf-card spotlight-card">
+          <div class="pill pill--soft">${panel.chip}</div>
+          <h3>${panel.title}</h3>
+          <p class="muted">${panel.body}</p>
+          <div class="spotlight-meta">${panel.highlight}</div>
+        </article>
+      `)
+      .join('');
+  }
+
+  if (quickGrid) {
+    quickGrid.innerHTML = quickActions
+      .map(action => `
+        <article class="hf-card quick-card">
+          <div class="quick-icon">${action.icon}</div>
+          <div>
+            <div class="list-title">${action.title}</div>
+            <div class="muted">${action.note}</div>
+          </div>
+          <button class="btn-mini" type="button">Launch</button>
+        </article>
+      `)
+      .join('');
+  }
+}
+
+function initCareTabs() {
+  const tabs = $('#careTabs');
+  const panel = $('#carePanel');
+  if (!tabs || !panel) return;
+
+  function renderTab(key) {
+    const items = careTabContent[key] || [];
+    panel.innerHTML = items
+      .slice(0, 4)
+      .map(item => `
+        <article class="hf-card care-card ${toneClass(item.tone)}">
+          <div>
+            <div class="list-title">${item.title}</div>
+            <div class="muted">${item.subtitle}</div>
+            <div class="meta-row">${item.footer}</div>
+          </div>
+          <span class="pill pill--soft">${item.badge}</span>
+        </article>
+      `)
+      .join('');
+  }
+
+  tabs.addEventListener('click', (e) => {
+    const btn = e.target.closest('.hf-chip');
+    if (!btn) return;
+    $$('.hf-chip', tabs).forEach(tab => tab.classList.remove('active'));
+    btn.classList.add('active');
+    renderTab(btn.dataset.tab);
+  });
+
+  const first = tabs.querySelector('.hf-chip');
+  if (first) {
+    first.classList.add('active');
+    renderTab(first.dataset.tab);
+  }
+}
+
+function renderInsurance() {
+  const grid = $('#insuranceGrid');
+  const finance = $('#financeCard');
+  if (grid) {
+    grid.innerHTML = insurancePanels
+      .map(card => `
+        <article class="hf-card tone-${card.tone}">
+          <div class="pill pill--soft">${card.meta}</div>
+          <h3>${card.title}</h3>
+          <p class="muted">${card.body}</p>
+        </article>
+      `)
+      .join('');
+  }
+
+  if (finance) {
+    finance.innerHTML = `
+      <article class="hf-card finance-card">
+        <div class="pill pill--soft">Finance OS</div>
+        <h3>${financeCard.title}</h3>
+        <ul class="finance-rows">
+          ${financeCard.rows.map(row => `<li><span>${row.label}</span><strong>${row.value}</strong></li>`).join('')}
+        </ul>
+      </article>
+    `;
+  }
+}
+
+function renderVitalsGrid() {
+  const grid = $('#vitalsGrid');
+  const insightHost = $('#vitalsInsights');
+  if (grid) {
+    grid.innerHTML = vitalsInsights
+      .map(item => `
+        <article class="hf-card vitals-card ${toneClass(item.tone)}">
+          <div class="list-title">${item.label}</div>
+          <div class="vital-value">${item.value}</div>
+          <div class="muted">${item.delta}</div>
+        </article>
+      `)
+      .join('');
+  }
+
+  if (insightHost) {
+    insightHost.innerHTML = `
+      <article class="hf-card">
+        <h3>AI Guardian summary</h3>
+        <p class="muted">Live stream secured; hydration and post-meal glucose within range. Alerts will auto-escalate to family and hospital desk.</p>
+        <div class="pill-row">
+          <span class="pill pill--soft">Fall detection on</span>
+          <span class="pill pill--soft">Arrhythmia watch</span>
+          <span class="pill pill--soft">IoMT secure</span>
+        </div>
+      </article>
+    `;
+  }
+}
+
+function renderRecordsVault() {
+  const grid = $('#recordsGrid');
+  if (grid) {
+    grid.innerHTML = recordVault
+      .map(rec => `
+        <article class="hf-card record-card ${toneClass(rec.tone)}">
+          <div>
+            <div class="list-title">${rec.title}</div>
+            <div class="muted">${rec.subtitle}</div>
+          </div>
+          <div class="record-meta">${rec.footer}<span class="pill pill--ghost">${rec.badge}</span></div>
+        </article>
+      `)
+      .join('');
+  }
+}
+
+function renderFamilyGrid() {
+  const grid = $('#familyGrid');
+  if (grid) {
+    grid.innerHTML = [
+      { title: 'Family dashboard', note: 'Vitals + approvals + SOS', icon: '👪' },
+      { title: 'Care manager', note: 'Concierge & travel', icon: '🧭' }
+    ].map(item => `
+      <article class="hf-card quick-card">
+        <div class="quick-icon">${item.icon}</div>
+        <div>
+          <div class="list-title">${item.title}</div>
+          <div class="muted">${item.note}</div>
+        </div>
+        <button class="btn-mini" type="button">Open</button>
+      </article>
+    `).join('');
+  }
+}
+
+function renderCopilotTiles() {
+  const grid = $('#copilotGrid');
+  const panel = $('#notificationsPanel');
+  if (grid) {
+    grid.innerHTML = [
+      { title: 'Symptom triage', note: 'Safe answers with doctor routing', icon: '🩺' },
+      { title: 'Diet & meds coach', note: 'Adherence nudges', icon: '🥗' },
+      { title: 'Insurance guide', note: 'Cashless + reimbursement help', icon: '🛡️' },
+      { title: 'Care summaries', note: 'Share AI notes with family', icon: '📤' }
+    ].map(item => `
+      <article class="hf-card copilot-card">
+        <div class="quick-icon">${item.icon}</div>
+        <div class="list-title">${item.title}</div>
+        <p class="muted">${item.note}</p>
+      </article>
+    `).join('');
+  }
+
+  if (panel) {
+    panel.innerHTML = `
+      <article class="hf-card notifications-card">
+        <div class="pill pill--soft">Notifications</div>
+        <ul>
+          ${notifications.map(note => `<li><span class="status-dot"></span>${note}</li>`).join('')}
+        </ul>
+      </article>
+    `;
+  }
+}
+
+function renderSettingsGrid() {
+  const grid = $('#settingsGrid');
+  if (grid) {
+    grid.innerHTML = [
+      { title: 'Language & locale', note: 'English + regional', icon: '🌐' },
+      { title: 'Theme', note: 'Light / Matte / Dark', icon: '🪟' },
+      { title: 'Privacy', note: 'Data sharing controls', icon: '🔒' },
+      { title: 'Devices', note: 'Connect wearables + IoMT', icon: '⌚' }
+    ].map(item => `
+      <article class="hf-card quick-card">
+        <div class="quick-icon">${item.icon}</div>
+        <div>
+          <div class="list-title">${item.title}</div>
+          <div class="muted">${item.note}</div>
+        </div>
+        <button class="btn-mini" type="button">Edit</button>
+      </article>
+    `).join('');
+  }
 }
 
 function initNav() {
@@ -559,6 +983,16 @@ function init() {
   initNav();
   initTicker();
   initPersonas();
+  renderOsStack();
+  renderOnboardingDeck();
+  renderDashboardPanels();
+  initCareTabs();
+  renderInsurance();
+  renderVitalsGrid();
+  renderRecordsVault();
+  renderFamilyGrid();
+  renderCopilotTiles();
+  renderSettingsGrid();
   renderAppointments();
   renderHospitals();
   renderDoctors();
