@@ -37,33 +37,33 @@ a {
 }
 
 /* ============================================================
-   THEME TOKENS — VOKA CERAMIC WHITE
+   THEME TOKENS — MATTE WHITE (Apple-inspired)
    ============================================================ */
 
 :root {
-  --bg: #f5f9ff;
-  --surface: rgba(255, 255, 255, 0.9);
-  --surface-strong: rgba(255, 255, 255, 1);
-  --border: rgba(0, 40, 90, 0.10);
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --surface-strong: #ffffff;
+  --border: rgba(12, 35, 82, 0.10);
 
-  --text: #0b2340;
-  --muted: #6a7c98;
+  --text: #0b1a33;
+  --muted: #4b5d78;
 
-  /* Neon accents */
-  --mint: #2affd4;
-  --aqua: #3fc7ff;
-  --violet: #b56cff;
+  /* Pastel accents */
+  --mint: #19cba0;
+  --aqua: #1e6bff;
+  --violet: #8b5cf6;
 
   /* Gradients */
-  --grad-mint-aqua: linear-gradient(135deg, #2affd4, #3fc7ff);
-  --grad-aqua-violet: linear-gradient(135deg, #3fc7ff, #b56cff);
+  --grad-mint-aqua: linear-gradient(135deg, #19cba0, #1e6bff);
+  --grad-aqua-violet: linear-gradient(135deg, #1e6bff, #8b5cf6);
 
   /* Shadows */
-  --shadow-soft: 0 6px 20px rgba(20, 40, 80, 0.12);
-  --shadow-ceramic: 0 12px 32px rgba(15, 35, 60, 0.16);
-  --shadow-glow: 0 0 20px rgba(70, 255, 220, 0.35);
+  --shadow-soft: 0 10px 32px rgba(12, 24, 52, 0.08);
+  --shadow-ceramic: 0 18px 48px rgba(12, 24, 52, 0.12);
+  --shadow-glow: 0 0 24px rgba(30, 107, 255, 0.35);
 
-  --radius: 26px;
+  --radius: 24px;
 
   --t: 260ms cubic-bezier(.22, .61, .36, 1);
 }
@@ -79,6 +79,18 @@ html[data-theme="dark"] {
 
   --shadow-soft: 0 6px 20px rgba(0, 0, 0, 0.60);
   --shadow-ceramic: 0 12px 32px rgba(0, 0, 0, 0.75);
+}
+
+/* Pure matte white reinforcement */
+html[data-theme="white"] {
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --surface-strong: #ffffff;
+  --border: rgba(12, 35, 82, 0.10);
+  --text: #0b1a33;
+  --muted: #4b5d78;
+  --shadow-soft: 0 10px 32px rgba(12, 24, 52, 0.08);
+  --shadow-ceramic: 0 18px 48px rgba(12, 24, 52, 0.12);
 }
 
 /* ============================================================
@@ -107,9 +119,10 @@ body {
   position: sticky;
   top: 0;
   z-index: 999;
-  backdrop-filter: blur(14px);
-  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(18px);
+  background: rgba(255, 255, 255, 0.9);
   border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow-soft);
 }
 
 html[data-theme="dark"] .hf-header {
@@ -123,6 +136,33 @@ html[data-theme="dark"] .hf-header {
   display: flex;
   align-items: center;
   gap: 16px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.hf-meta-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  background: linear-gradient(120deg, rgba(14,24,48,0.06), rgba(14,24,48,0.02));
+  border-radius: 12px;
+  border: 1px solid rgba(12, 35, 82, 0.08);
+  box-shadow: var(--shadow-soft);
+}
+
+.hf-meta-nav a {
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 6px 10px;
+  border-radius: 10px;
+  transition: var(--t);
+}
+
+.hf-meta-nav a:hover,
+.hf-meta-nav a:focus-visible {
+  background: rgba(30, 107, 255, 0.08);
+  color: #0b1a33;
 }
 
 /* Avatar + Neon Ring */
