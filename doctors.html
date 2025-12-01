@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <title>HealthFlo — Doctors</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="main.js"></script>
+</head>
+
+<body>
+
+<!-- Header -->
+<header class="hf-header">
+  <div class="hf-header-left">
+    <a href="dashboard.html" class="hf-logo">
+      <span class="logo-dot"></span> HealthFlo
+    </a>
+  </div>
+  <div class="hf-header-right">
+    <button id="themeToggle" class="hf-icon-btn">🌗</button>
+  </div>
+</header>
+
+<!-- Section -->
+<section class="hf-section">
+  <h2 class="hf-title">Find a Doctor</h2>
+
+  <!-- Toolbar -->
+  <div class="hf-toolbar">
+    <input id="doctorSearch" type="search" class="hf-search"
+      placeholder="Search doctors, specialties, symptoms…">
+
+    <div class="hf-chip-row">
+      <button class="hf-chip active" data-specialty="all">All</button>
+      <button class="hf-chip" data-specialty="cardio">Cardiology</button>
+      <button class="hf-chip" data-specialty="neuro">Neurology</button>
+      <button class="hf-chip" data-specialty="ortho">Orthopedics</button>
+      <button class="hf-chip" data-specialty="gyn">Gynaecology</button>
+      <button class="hf-chip" data-specialty="ped">Pediatrics</button>
+    </div>
+  </div>
+
+  <!-- Doctors List -->
+  <div id="doctorList" class="hf-doctors">
+    <!-- Injected by JS -->
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="hf-footer">
+  <a href="dashboard.html">🏠</a>
+  <a href="appointments.html">📅</a>
+  <a href="hospitals.html">🏥</a>
+  <a href="medicines.html">💊</a>
+  <a href="profile.html">👤</a>
+</footer>
+
+</body>
+</html>
