@@ -75,6 +75,58 @@
     </div>
   </section>
 
+  <section class="hf-section" id="command">
+    <div class="section-head">
+      <div>
+        <p class="badge">Command board</p>
+        <h2>Live flow control for OPD, IPD, OT, and insurance desk.</h2>
+        <p class="muted">See escalation queues, discharge readiness, OT turnaround, and insurance timers with AI guardrails that auto-notify teams.</p>
+      </div>
+      <div class="section-actions">
+        <button class="btn-ghost" data-cta="broadcast update">Broadcast update</button>
+        <button class="btn-primary" data-cta="lock discharge">Lock discharges</button>
+      </div>
+    </div>
+    <div class="hf-grid">
+      <div class="hf-card tile">
+        <h3>Escalation radar</h3>
+        <p class="muted">Real-time watch across ER, wards, ICUs, and OT to prevent silent delays.</p>
+        <div class="vitals-stack">
+          <div class="vital-row"><span>ER</span><strong id="erEscalations">0 high</strong><small>Chest pain, polytrauma</small></div>
+          <div class="vital-row"><span>IPD</span><strong id="ipdEscalations">1 medium</strong><small>Fluids adjust</small></div>
+          <div class="vital-row"><span>OT</span><strong id="otEscalations">0</strong><small>Implant checked</small></div>
+          <div class="vital-row"><span>Insurance</span><strong id="insuranceAging">24 mins</strong><small>Pre-auth aging</small></div>
+        </div>
+        <p class="ai-note" id="escalationInsight">AI holding: no red cases; prepping intensivist standby.</p>
+      </div>
+      <div class="hf-card tile">
+        <h3>Discharge readiness</h3>
+        <p class="muted">Nursing, meds, labs, billing, and insurance checklists synced for same-day discharge.</p>
+        <div class="mini-grid">
+          <div class="mini-card"><span>Ready today</span><strong id="dischargeReady">0</strong><small>Patients</small></div>
+          <div class="mini-card"><span>Docs locked</span><strong id="docsLocked">0</strong><small>Summaries</small></div>
+          <div class="mini-card"><span>Billing clean</span><strong id="billingClean">0</strong><small>With approvals</small></div>
+        </div>
+        <ul class="bullet-list">
+          <li>AI validates meds vs diagnosis before final sign-off.</li>
+          <li>Insurance desk pre-audits deductions and non-payables.</li>
+          <li>Family notified with discharge window and payment links.</li>
+        </ul>
+      </div>
+      <div class="hf-card tile">
+        <h3>OT & bedboard</h3>
+        <p class="muted">Turnaround clocks, anesthesia readiness, and bed releases stay visible to coordinators.</p>
+        <div class="mini-row"><span>OT turnover</span><strong id="otTurnover">0 mins</strong></div>
+        <div class="mini-row"><span>Bed releases</span><strong id="bedReleases">0 wards</strong></div>
+        <div class="mini-row"><span>Surge setup</span><strong id="surgeSetup">Ready</strong></div>
+        <div class="inline-actions">
+          <button data-cta="open ot board">Open OT board</button>
+          <button data-cta="push bed release">Push bed release</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section id="registration" class="hf-section">
     <div class="section-head">
       <div>
