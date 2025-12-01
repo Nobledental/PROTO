@@ -319,9 +319,12 @@ function computeTotals() {
   $('#roundOff').textContent = formatINR(roundOff);
   $('#netPayable').textContent = formatINR(Math.max(0, rounded));
 
-  $('#patientPayScenario')?.textContent = formatINR(patientPay);
-  $('#insurerPayScenario')?.textContent = formatINR(insuranceShare);
-  $('#scenarioSla')?.textContent = insuranceShare > 0 ? 'Cashless • <35 mins' : 'Reimbursement • 9 days';
+    const patientScenario = $('#patientPayScenario');
+    if (patientScenario) patientScenario.textContent = formatINR(patientPay);
+    const insurerScenario = $('#insurerPayScenario');
+    if (insurerScenario) insurerScenario.textContent = formatINR(insuranceShare);
+    const scenarioSla = $('#scenarioSla');
+    if (scenarioSla) scenarioSla.textContent = insuranceShare > 0 ? 'Cashless • <35 mins' : 'Reimbursement • 9 days';
 
   $('#unbilledValue').textContent = formatINR(hospitalTotals.total + room.total);
   $('#cashlessValue').textContent = formatINR(insuranceShare);
