@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HealthFlo — Labs & Diagnostics</title>
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="main.js"></script>
+</head>
+
+<body>
+
+<header class="hf-header">
+  <a href="dashboard.html" class="hf-logo"><span class="logo-dot"></span> HealthFlo</a>
+  <button id="themeToggle" class="hf-icon-btn">🌗</button>
+</header>
+
+<section class="hf-section">
+  <h2 class="hf-title">Diagnostics & Labs</h2>
+
+  <div class="hf-toolbar">
+    <input id="labSearch" class="hf-search" placeholder="Search tests, labs, packages…">
+
+    <div class="hf-chip-row">
+      <button class="hf-chip active" data-filter="all">All</button>
+      <button class="hf-chip" data-filter="home">Home Collection</button>
+      <button class="hf-chip" data-filter="fasting">Fasting</button>
+      <button class="hf-chip" data-filter="urgent">Urgent Tests</button>
+    </div>
+  </div>
+
+  <div id="labList" class="hf-labs">
+    <!-- Auto-filled by main.js -->
+  </div>
+</section>
+
+<footer class="hf-footer">
+  <a href="dashboard.html">🏠</a>
+  <a href="appointments.html">📅</a>
+  <a href="hospitals.html">🏥</a>
+  <a href="labs.html" class="active">🧪</a>
+  <a href="profile.html">👤</a>
+</footer>
+
+</body>
+</html>
