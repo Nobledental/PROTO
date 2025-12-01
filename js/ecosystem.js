@@ -25,14 +25,26 @@ if (navToggle) {
 
 // Persona activation
 const personaSelect = $('#personaSelect');
+const personaNarratives = {
+  patient: 'Patient view: AI shields family members, books follow-ups, and preps insurance packets.',
+  hospital: 'Hospital view: OPD/IPD queues, OT events, pharmacy, labs, and billing stay in sync with zero audit drift.',
+  insurer: 'Insurer view: Cashless aging, deduction guard, and audit kits flow in with IRDAI compliance locks.',
+  rcm: 'RCM view: Denial prevention, AR heatmaps, and TPA escalations are orchestrated with timestamps.'
+};
+const personaStory = $('#personaStory');
+function setPersonaStory(key = 'patient') {
+  if (personaStory) personaStory.textContent = personaNarratives[key] || personaNarratives.patient;
+}
 if (personaSelect) {
   personaSelect.addEventListener('click', (e) => {
     if (e.target.matches('.hf-chip')) {
       $$('.hf-chip', personaSelect).forEach(chip => chip.classList.remove('active'));
       e.target.classList.add('active');
       document.body.dataset.persona = e.target.dataset.persona;
+      setPersonaStory(e.target.dataset.persona);
     }
   });
+  setPersonaStory('patient');
 }
 
 // Ticker autoplay
@@ -47,6 +59,23 @@ if (ticker) {
     }
   }, 30);
 }
+
+// Metric counters
+const counters = $$('[data-counter]');
+function animateCounter(el) {
+  const target = parseFloat(el.dataset.counter || '0');
+  const suffix = el.dataset.suffix || '';
+  const format = el.dataset.format === 'compact';
+  let current = 0;
+  const step = target / 60;
+  const tick = () => {
+    current = Math.min(target, current + step);
+    el.textContent = format ? Intl.NumberFormat('en', { notation: 'compact' }).format(current) + suffix : `${current.toFixed(1).replace(/\.0$/, '')}${suffix}`;
+    if (current < target) requestAnimationFrame(tick);
+  };
+  tick();
+}
+counters.forEach(animateCounter);
 
 // Copilot panel
 const copilotFab = $('#copilotFab');
@@ -143,6 +172,34 @@ if (vitalsStream) {
     if (vitalInsight) vitalInsight.textContent = 'AI confirms readings are within your baseline. Hydration reminder in 20 mins.';
   }, 3200);
 }
+
+// Experience control center updates
+const railStatus = $('#railStatus');
+const cashlessSla = $('#cashlessSla');
+const vitalsUptime = $('#vitalsUptime');
+const claimReady = $('#claimReady');
+const slaCashless = $('#slaCashless');
+const deviceLink = $('#deviceLink');
+const ambulanceGrid = $('#ambulanceGrid');
+const rcmRisk = $('#rcmRisk');
+const systemInsight = $('#systemInsight');
+function updateExperienceBoard() {
+  const wait = Math.max(18, Math.floor(Math.random() * 18) + 26);
+  const uptime = (99.4 + Math.random() * 0.5).toFixed(1);
+  const claims = Math.floor(Math.random() * 6) + 12;
+  const approvals = (95 + Math.random() * 4).toFixed(1);
+  cashlessSla && (cashlessSla.textContent = `${wait} mins`);
+  vitalsUptime && (vitalsUptime.textContent = `${uptime}%`);
+  claimReady && (claimReady.textContent = `${claims} cases`);
+  slaCashless && (slaCashless.textContent = `${approvals}%`);
+  deviceLink && (deviceLink.textContent = `${uptime}%`);
+  ambulanceGrid && (ambulanceGrid.textContent = `${Math.floor(Math.random() * 4) + 9}m ETA`);
+  rcmRisk && (rcmRisk.textContent = approvals > 96 ? 'Low' : 'Watch');
+  railStatus && (railStatus.textContent = approvals > 96 ? 'All steps green • No dropped handoffs' : 'Insurance rail nudging pre-auth for 2 cases');
+  systemInsight && (systemInsight.textContent = 'AI watching: no SLA breaches; pushing pre-emptive insurer nudges.');
+}
+setInterval(updateExperienceBoard, 3600);
+updateExperienceBoard();
 
 // Insurance CTA
 $('#openInsurance')?.addEventListener('click', () => {
