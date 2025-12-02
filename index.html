@@ -1,71 +1,196 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="white">
-
+<html lang="en" data-theme="matte">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>HealthFlo — Patient OS</title>
-
   <link rel="stylesheet" href="assets/styles.css">
   <script defer src="assets/main.js"></script>
 </head>
-
 <body>
+  <header class="hf-header hero-header">
+    <div class="hf-logo"><span class="logo-dot"></span> HealthFlo OS</div>
+    <div class="header-tools">
+      <div class="hf-chip ghost">Matte Edition</div>
+      <button id="themeToggle" class="hf-icon-btn" aria-label="Toggle theme">🪟</button>
+    </div>
+  </header>
 
-<header class="hf-header">
-  <div class="hf-logo"><span class="logo-dot"></span> HealthFlo OS</div>
-  <button id="themeToggle" class="hf-icon-btn">🌗</button>
-</header>
+  <main class="landing-shell">
+    <section class="container hf-hero-pro">
+      <div class="hf-hero-copy">
+        <div class="hf-chip brand">AI-first Care Stack</div>
+        <h1>Next-gen Patient Operating System</h1>
+        <p class="muted">Blending appointments, vitals, insurance, finance, and copilot support into a matte, clinical-grade interface inspired by the best medical dashboards.</p>
+        <div class="hf-hero-actions">
+          <a class="btn btn-primary" href="dashboard.html">Launch Command Center</a>
+          <a class="btn btn-ghost" href="appointments.html">Book a Specialist</a>
+          <a class="btn btn-ghost" href="copilot.html">Ask Copilot</a>
+        </div>
+        <div class="hf-kpis">
+          <div class="kpi-card">
+            <span class="label">Heart Rate</span>
+            <strong>78 bpm</strong>
+            <small class="positive">Stable · Live IoMT</small>
+          </div>
+          <div class="kpi-card">
+            <span class="label">Today</span>
+            <strong>3 Appointments</strong>
+            <small>Doctor · Lab · Follow-up</small>
+          </div>
+          <div class="kpi-card">
+            <span class="label">Insurance</span>
+            <strong>Cashless Ready</strong>
+            <small class="positive">Pre-auth cleared</small>
+          </div>
+        </div>
+      </div>
 
-<section class="hf-section">
-  <h2 class="hf-title">Welcome Dhivakaran</h2>
-  <p class="muted">Your AI-first healthcare operating system</p>
+      <div class="hf-hero-panel" aria-label="Live vitals preview">
+        <div class="panel-top">
+          <div class="hf-chip ghost">Cardiac View</div>
+          <div class="panel-actions">
+            <button class="hf-icon-btn mini" aria-label="Favourite">★</button>
+            <button class="hf-icon-btn mini" aria-label="Share">⇪</button>
+          </div>
+        </div>
+        <div class="heart-orb">
+          <div class="heart-glow"></div>
+          <div class="heart-core">❤</div>
+          <div class="pulse-rings"></div>
+        </div>
+        <div class="hf-pulse-grid">
+          <div class="pulse-card">
+            <p class="label">Avg HR</p>
+            <strong>76 bpm</strong>
+            <div class="pulse-sparkline" aria-hidden="true">
+              <span style="height:48%"></span>
+              <span style="height:72%"></span>
+              <span style="height:68%"></span>
+              <span style="height:85%"></span>
+              <span style="height:60%"></span>
+              <span style="height:78%"></span>
+            </div>
+          </div>
+          <div class="pulse-card">
+            <p class="label">SpO₂</p>
+            <strong>98 %</strong>
+            <small class="muted">Auto alerts enabled</small>
+          </div>
+          <div class="pulse-card">
+            <p class="label">BP</p>
+            <strong>120 / 78</strong>
+            <small class="muted">Trend is normal</small>
+          </div>
+          <div class="pulse-card">
+            <p class="label">Sleep</p>
+            <strong>7h 45m</strong>
+            <small class="muted">Recovery green</small>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <div class="hf-grid" style="margin-top:20px">
+    <section class="container insights-lab">
+      <div class="insight-hero">
+        <div class="insight-avatar" aria-hidden="true">🧑‍⚕️</div>
+        <div>
+          <p class="muted">Research-driven UI</p>
+          <h2>We built the flow with clinicians, admins, and nurses</h2>
+          <p class="muted">Every surface is matte, calm, and readable with premium depth, inspired by your reference visuals.</p>
+        </div>
+      </div>
+      <div class="insight-grid">
+        <div class="insight-bubble">
+          <p>Administrators need live occupancy, billing, and discharge status without digging into modules.</p>
+          <span class="muted">Admin Desk</span>
+        </div>
+        <div class="insight-bubble">
+          <p>Doctors want simplified patient timelines, med safety alerts, and one-tap medical history.</p>
+          <span class="muted">Consulting Doctors</span>
+        </div>
+        <div class="insight-bubble">
+          <p>Nurses rely on intuitive rounds, barcode meds, and effortless vitals capture on mobile.</p>
+          <span class="muted">Nursing Staff</span>
+        </div>
+      </div>
+    </section>
 
-    <a class="hf-tile" href="dashboard.html">
-      <div class="t-icon">🏥</div>
-      <strong>Open Patient Dashboard</strong>
-      <span class="muted">Care, vitals, appointments, records…</span>
-    </a>
-
-    <a class="hf-tile" href="ecosystem.html">
-      <div class="t-icon">🌐</div>
-      <strong>HealthFlo Ecosystem</strong>
-      <span class="muted">Patient, Hospital, Insurance, RCM, Admin OS</span>
-    </a>
-
-    <a class="hf-tile" href="hospital-os.html">
-      <div class="t-icon">🏥</div>
-      <strong>Hospital OS (HMS)</strong>
-      <span class="muted">Registration, IPD, labs, pharmacy, billing</span>
-    </a>
-
-    <a class="hf-tile" href="copilot.html">
-      <div class="t-icon">🤖</div>
-      <strong>Open AI Copilot</strong>
-      <span class="muted">Ask anything medical</span>
-     </a>
-
-    <a class="hf-tile" href="billing-os.html">
-      <div class="t-icon">💳</div>
-      <strong>Billing OS</strong>
-      <span class="muted">OPD/IPD/OT, pharmacy, labs, packages, payments</span>
-    </a>
-
-    <a class="hf-tile" href="appointments.html">
-      <div class="t-icon">📅</div>
-      <strong>Book Appointment</strong>
-      <span class="muted">Doctor, lab, clinic…</span>
-    </a>
-
-    <a class="hf-tile" href="profile.html">
-      <div class="t-icon">👤</div>
-      <strong>Your Profile</strong>
-    </a>
-
-  </div>
-</section>
-
+    <section class="container nav-suite">
+      <div class="section-head">
+        <div>
+          <p class="muted">Launchpads</p>
+          <h2>Everything in one clinical workspace</h2>
+        </div>
+        <div class="hf-chip ghost">Premium matte cards</div>
+      </div>
+      <div class="hf-app-grid">
+        <a class="nav-card" href="dashboard.html">
+          <div class="nav-icon">🏠</div>
+          <div>
+            <strong>Patient Dashboard</strong>
+            <p class="muted">Vitals, appointments, alerts</p>
+          </div>
+          <span class="status-pill positive">Live</span>
+        </a>
+        <a class="nav-card" href="appointments.html">
+          <div class="nav-icon">📅</div>
+          <div>
+            <strong>Appointments</strong>
+            <p class="muted">Video, in-person, lab slots</p>
+          </div>
+          <span class="status-pill">3 today</span>
+        </a>
+        <a class="nav-card" href="insurance.html">
+          <div class="nav-icon">🛡️</div>
+          <div>
+            <strong>Insurance OS</strong>
+            <p class="muted">Cashless, reimbursements, EMI</p>
+          </div>
+          <span class="status-pill positive">Pre-auth ok</span>
+        </a>
+        <a class="nav-card" href="hospital-os.html">
+          <div class="nav-icon">🏥</div>
+          <div>
+            <strong>Hospital OS</strong>
+            <p class="muted">Registration to discharge</p>
+          </div>
+          <span class="status-pill">HMS</span>
+        </a>
+        <a class="nav-card" href="finance.html">
+          <div class="nav-icon">💳</div>
+          <div>
+            <strong>Finance & Billing</strong>
+            <p class="muted">RCM-ready, split payments</p>
+          </div>
+          <span class="status-pill">RCM</span>
+        </a>
+        <a class="nav-card" href="vitals.html">
+          <div class="nav-icon">💓</div>
+          <div>
+            <strong>Vitals & IoMT</strong>
+            <p class="muted">Real-time streaming, alerts</p>
+          </div>
+          <span class="status-pill positive">Synced</span>
+        </a>
+        <a class="nav-card" href="records.html">
+          <div class="nav-icon">🗂️</div>
+          <div>
+            <strong>Health Records</strong>
+            <p class="muted">AI summaries, secure sharing</p>
+          </div>
+          <span class="status-pill">Vault</span>
+        </a>
+        <a class="nav-card" href="copilot.html">
+          <div class="nav-icon">🤖</div>
+          <div>
+            <strong>AI Copilot</strong>
+            <p class="muted">Ask anything medical</p>
+          </div>
+          <span class="status-pill positive">Online</span>
+        </a>
+      </div>
+    </section>
+  </main>
 </body>
 </html>
