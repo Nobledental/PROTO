@@ -12,7 +12,7 @@ const $$ = (selector, el = document) => [...el.querySelectorAll(selector)];
 const THEMES = ['light', 'matte', 'dark'];
 const THEME_ICONS = { light: '☀️', matte: '🪟', dark: '🌙' };
 function applyTheme(theme) {
-  const chosen = THEMES.includes(theme) ? theme : 'light';
+  const chosen = THEMES.includes(theme) ? theme : 'matte';
   document.documentElement.dataset.theme = chosen;
   localStorage.setItem('hfTheme', chosen);
   $$('#themeToggle, #themeToggle2').forEach(btn => {
