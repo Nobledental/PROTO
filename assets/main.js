@@ -24,7 +24,7 @@ function applyTheme(theme) {
 }
 
 function initTheme() {
-  applyTheme(localStorage.getItem('hfTheme') || 'light');
+  applyTheme(localStorage.getItem('hfTheme') || 'matte');
   $$('#themeToggle, #themeToggle2').forEach(btn => {
     btn.addEventListener('click', () => {
       const current = document.documentElement.dataset.theme || 'light';
